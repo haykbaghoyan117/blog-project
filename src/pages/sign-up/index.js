@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { signUpWithEmailAndPassword } from "../../firebase/auth";
+import { signUpWithEmailAndPassword } from "../../firebase";
 
 class SignUp extends Component {
 
@@ -20,27 +20,35 @@ class SignUp extends Component {
         e.preventDefault();
         const { email, password, name } = this.state;
         return signUpWithEmailAndPassword(email, password)
-            .then(obj => console.log(obj))
-            .catch(err => console.log(err))
+            .then(() => this.props.history.push('/'))
+            .catch(err => {
+                alert(err);
+                this.setState({
+                    email: '',
+                    password: '',
+                    name: ''
+                })
+            })
     }
     
 
     render() {
+        const { email, password, name } = this.state;
         return (
             <div>
                 <h3>Sign Up</h3>
                 <form onSubmit={this.handleSubmit}>
                     <div className="form-group">
                         <label htmlFor="email">Name:</label>
-                        <input type="text" className="form-control" id="name" onChange={this.handleChange} />
+                        <input type="text" className="form-control" id="name" value={name} onChange={this.handleChange} />
                     </div>
                     <div className="form-group">
                         <label htmlFor="email">Email address:</label>
-                        <input type="email" className="form-control" id="email" onChange={this.handleChange} />
+                        <input type="email" className="form-control" id="email" value={email} onChange={this.handleChange} />
                     </div>
                     <div className="form-group">
                         <label htmlFor="password">Password:</label>
-                        <input type="password" className="form-control" id="password" onChange={this.handleChange} />
+                        <input type="password" className="form-control" id="password" value={password} onChange={this.handleChange} />
                     </div>
                     <button type="submit" className="btn btn-success">Submit</button>
                 </form>
