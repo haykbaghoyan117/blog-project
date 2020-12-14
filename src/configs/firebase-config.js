@@ -1,4 +1,4 @@
-const firebaseConfig = {
+export default {
     apiKey: "AIzaSyCua4SWRrXAX_WqPhcacrmci3G2V6U6B3I",
     authDomain: "fir-blog-project-e13a0.firebaseapp.com",
     databaseURL: "https://fir-blog-project-e13a0-default-rtdb.firebaseio.com",

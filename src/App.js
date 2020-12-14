@@ -8,13 +8,13 @@ import SignUp from './pages/sign-up';
 import ChangeProfile from './pages/change-profile';
 import ProfilePage from './pages/profile-page';
 import AdminPage from './pages/admin-page';
-import * as firebase from './firebase/';
+// import { auth } from './firebase'
 import { connect } from 'react-redux';
-import * as actions from "./store/actions/user";
+// import * as actions from "./store/actions/user";
 
 class App extends Component {
     componentDidMount() {
-        // firebase.auth.onAuthStateChanged((authUser) => this.props.setUser(authUser));
+        // auth.onAuthStateChanged((authUser) => this.props.setUser(authUser));
     }
     render() {
         return(
@@ -37,11 +37,11 @@ class App extends Component {
 }
 
 const mapStateToProps = (state) => ({
-    
+
 })
 
 const mapDispatchToProps = {
-    ...actions
+    // ...actions
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);
