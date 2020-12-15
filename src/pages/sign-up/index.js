@@ -20,7 +20,13 @@ class SignUp extends Component {
         e.preventDefault();
         const { email, password, name } = this.state;
         return signUpWithEmailAndPassword(email, password)
-            .then(() => this.props.history.push('/'))
+        .then((user) => {
+           return user.user.updateProfile({
+            displayName: this.state.name
+            }).then(res => console.log(res))
+        } )
+      
+            // .then(() => this.props.history.push('/'))
             .catch(err => {
                 alert(err);
                 this.setState({

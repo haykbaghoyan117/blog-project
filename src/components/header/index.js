@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from "react-router-dom";
+import { signOut } from '../../firebase'
 
 class Header extends Component {
     render() {
@@ -21,6 +22,9 @@ class Header extends Component {
                             </li>
                             <li className="nav-item">
                                 <Link className="nav-link" to='sign-up'>SignUp</Link>
+                            </li>
+                            <li className="nav-item">
+                                <Link className="nav-link" to='sign-in' onClick={signOut}>SignOut</Link>
                             </li>
                         </ul>
                     </div>

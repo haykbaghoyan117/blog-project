@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
+import { auth } from '../../firebase'
 
 
 class HomePage extends Component {
 
-    componentDidMount() {
-
+    componentDidUpdate() {
+        console.log(auth.email)
     }
   
     render() {
