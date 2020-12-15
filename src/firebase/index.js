@@ -39,3 +39,22 @@ export const readData = () => {
         this.setState({name: elem.val()})
     })
 }
+
+
+
+
+
+
+
+
+//read data
+// export const dbRefObject = db.ref().child('object');
+// dbRefObject.on('value', snap => console.log('xxxxxxx', snap.val()));
+// const dbRefList = dbRefObject.child('//childi anuny');
+// dbRefList.on('')
+
+// const sendData = () => {
+//     const { key, value } = this.state;
+//     db.ref('key').push('value')
+// }
+ 

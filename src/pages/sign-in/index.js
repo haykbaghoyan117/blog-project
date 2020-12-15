@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
 import { signInWithEmailAndPassword } from "../../firebase";
-// import { browserHistory } from 'react-router';
-
 
 class SignIn extends Component {
 
