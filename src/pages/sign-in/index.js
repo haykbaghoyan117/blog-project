@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { signInWithEmailAndPassword } from "../../firebase";
+import { connect } from 'react-redux';
+import { setUser } from '../../store/actions'
 
 class SignIn extends Component {
 
@@ -14,7 +16,7 @@ class SignIn extends Component {
     
 
     componentDidUpdate(prevProps, prevState) {
-
+        // console.log(this.props.user)
     }
 
     handleChange = ({ target: {value, id}}) => {
@@ -24,16 +26,19 @@ class SignIn extends Component {
     }
 
     handleSubmit = (e) => {
+        const { setUser } = this.props
         e.preventDefault();
-        const { email, password, name } = this.state;
+        const { email, password } = this.state;
         return signInWithEmailAndPassword(email, password)
+            .then(el => {
+                setUser(el.user)
+            })
             .then(() => this.props.history.push('/'))
             .catch(err => {
                 alert(err);
                 this.setState({
                     email: '',
-                    password: '',
-                    name: ''
+                    password: ''
                 })
             })
     }
@@ -58,4 +63,13 @@ class SignIn extends Component {
         )
     }
 }
-export default SignIn;
+
+const mapStateToProps = ({ user }) => {
+    return { user }
+}
+
+const mapDispatchToProps = {
+    setUser
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(SignIn);

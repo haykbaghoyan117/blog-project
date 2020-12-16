@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
-import { auth } from '../../firebase'
+import { connect } from 'react-redux'
 
 
 class HomePage extends Component {
 
     componentDidUpdate() {
-        console.log(auth.email)
+        console.log('----->', this.props)
     }
   
     render() {
@@ -14,4 +14,13 @@ class HomePage extends Component {
         )
     }
 }
-export default HomePage;
+
+const mapStateToProps = ({ user }) => {
+    return { user }
+}
+
+const mapDispatchToProps = {
+    
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(HomePage);

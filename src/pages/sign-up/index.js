@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Children, Component } from 'react';
 import { signUpWithEmailAndPassword } from "../../firebase";
 
 class SignUp extends Component {
@@ -21,10 +21,11 @@ class SignUp extends Component {
         const { email, password, name } = this.state;
         return signUpWithEmailAndPassword(email, password)
         .then((user) => {
-           return user.user.updateProfile({
+           user.user.updateProfile({
             displayName: this.state.name
-            }).then(res => console.log(res))
-        } )
+            }); console.log(user)
+
+        }).then(user => console.log(user))
       
             // .then(() => this.props.history.push('/'))
             .catch(err => {
