@@ -8,13 +8,13 @@ import SignUp from './pages/sign-up';
 import ChangeProfile from './pages/change-profile';
 import ProfilePage from './pages/profile-page';
 import AdminPage from './pages/admin-page';
-// import { auth } from './firebase'
+import { auth } from './firebase'
 import { connect } from 'react-redux';
-// import * as actions from "./store/actions/user";
+import { setUser } from "./store/actions";
 
 class App extends Component {
     componentDidMount() {
-        // auth.onAuthStateChanged((authUser) => this.props.setUser(authUser));
+        auth.onAuthStateChanged((authUser) => this.props.setUser(authUser));
     }
     render() {
         return(
@@ -41,7 +41,7 @@ const mapStateToProps = (state) => ({
 })
 
 const mapDispatchToProps = {
-    // ...actions
+    setUser
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

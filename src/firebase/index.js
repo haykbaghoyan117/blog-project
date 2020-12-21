@@ -9,6 +9,7 @@ firebase.initializeApp(firebaseConfig);
 export const db = firebase.database();
 export const  auth = firebase.auth();
 export const firestore = firebase.firestore();
+export const storage = firebase.storage();
 
 export const signInWithEmailAndPassword = (email, password) => {
     return auth.signInWithEmailAndPassword(email, password);
@@ -34,7 +35,7 @@ export const userId = () => auth.currentUser.uid;
 // });
 
 export const readData = () => {
-    const name = db.ref('name');
+    const name = db.ref('posts');
     name.on('value', (elem) => {
         this.setState({name: elem.val()})
     })
@@ -47,7 +48,7 @@ export const readData = () => {
 
 
 
-//read data
+// read data
 // export const dbRefObject = db.ref().child('object');
 // dbRefObject.on('value', snap => console.log('xxxxxxx', snap.val()));
 // const dbRefList = dbRefObject.child('//childi anuny');

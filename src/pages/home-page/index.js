@@ -4,8 +4,17 @@ import { connect } from 'react-redux'
 
 class HomePage extends Component {
 
+    componentDidMount() {
+        if(this.props.user.user.email === 'admin@gmail.com'){
+            return (
+                this.props.history.push('/admin-page')
+            )
+        }
+    }
+    
+
     componentDidUpdate() {
-        console.log('----->', this.props)
+        console.log('home page', this.props)
     }
   
     render() {
