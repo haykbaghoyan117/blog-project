@@ -28,18 +28,18 @@ export const writeUserData = (userId, name, email, imageUrl) => {
         profile_picture: imageUrl
     });
 }
-export const userId = () => auth.currentUser.uid;
+// export const userId = () => auth.currentUser.uid;
 // return db.ref('/users/' + userId).once('value').then((snapshot) => {
 //  const username = (snapshot.val() && snapshot.val().username) || 'Anonymous';
 //   // ...
 // });
 
-export const readData = () => {
-    const name = db.ref('posts');
-    name.on('value', (elem) => {
-        this.setState({name: elem.val()})
-    })
-}
+// export const readData = () => {
+//     const name = db.ref('posts');
+//     name.on('value', (elem) => {
+//         this.setState({name: elem.val()})
+//     })
+// }
 
 
 

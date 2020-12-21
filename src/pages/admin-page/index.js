@@ -1,38 +1,46 @@
 import React, { Component } from 'react';
-import { db } from "../../firebase";
+import { db, storage } from "../../firebase";
+import HomePage from '../home-page';
 
 class AdminPage extends Component {
 
     state = {
         title: '',
         description: '',
-        name: ''
+        file: null,
+        fileUrl: null
     }
 
     handleChange = ({ target: { value, id } }) => {
         this.setState({ [id]: value })
     }
 
-    handleSubmit = (e) => {
+    onFileChange = async (e) => {
+        const file = e.target.files[0];
+        this.setState({ file });
+    }
+    
+
+    handleSubmit = async (e) => {
         e.preventDefault();
-        this.readData();
-        this.sendData()
+        const { file } = this.state;
+        const storageRef = storage.ref();
+        const fileRef = storageRef.child(file.name);
+        await fileRef.put(file);
+        const fileUrl = await fileRef.getDownloadURL();
+        await this.setState({ fileUrl });
+        this.addData();
     }
 
-    readData = () => {
-        const dbRefObject = db.ref().child('posts').child('comments');
-        dbRefObject.on('value', snap => console.log('xxxxxxx', snap.val()));
-    }
-
-    sendData = () => {
-        // const { key, value } = this.state;
-        const dbRefObject = db.ref().child('posts').child('comments').child('uid');
-        dbRefObject.on('child_added', snap => console.log('yyyyyyyy', snap.val()));
-        // dbRefObject.push('hayk');
+    addData = async () => {
+        const { title, description, fileUrl } = this.state;
+        await db.ref().child('posts').child('title').push(title);
+        await db.ref().child('posts').child('description').push(description);
+        await db.ref().child('posts').child('imgUrl').push(fileUrl);
     }
 
     componentDidUpdate(prevProps, prevState) {
-        console.log(this.state)
+        console.log('MMMMMMMMMMMM', this.state)
     }
 
 
@@ -40,16 +48,18 @@ class AdminPage extends Component {
     render() {
         return (
             <React.Fragment>
+                <h1>ADMIN PAGE</h1>
                 <form action="" onSubmit={this.handleSubmit} >
                     <div className="form-group">
-                        <input type="text" className="form-control" placeholder="Your post title" id="title" onChange={this.handleChange} />
+                        <input type="text" className="form-control" value={this.state.title} placeholder="Your post title" id="title" onChange={this.handleChange} />
                     </div>
-                    {/* <div className="form-group">
-                        <input type="file" className="form-control" placeholder="img url" id="img" />
-                    </div> */}
                     <div className="form-group">
-                        <input type="text" className="form-control" placeholder="description" id="description" onChange={this.handleChange} />
+                        <input type="file" className="form-control" onChange={this.onFileChange} placeholder="img url" id="img" />
                     </div>
+                    <div className="form-group">
+                        <input type="text" className="form-control" value={this.state.description} placeholder="description" id="description" onChange={this.handleChange} />
+                    </div>
+                    {/* <img alt='jjj' src={this.state.fileUrl} /> */}
                     {/* <div className="dropdown">
                         <button className="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             Post categoria
@@ -62,6 +72,7 @@ class AdminPage extends Component {
                     </div> */}
                     <button type="submit" className="btn btn-primary">Add post</button>
                 </form>
+                <HomePage />
             </React.Fragment>
         )
     }
