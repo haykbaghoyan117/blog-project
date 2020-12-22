@@ -1,22 +1,12 @@
 import React, { Component } from 'react';
-import { dbRefObject } from '../../firebase'
 
 class ProfilePage extends Component {
-
 
     state = {
         inputList: [{id: 0}],
         obj: {},
         k: 0
     }
-
-
-
-    componentDidUpdate() {
-        // dbRefObject.on('value', snap => console.log('--->', snap.val()))
-
-    }
-
 
     addButton = () => {
         this.setState({inputList: [...this.state.inputList, { id: this.state.k+1, value: '' }]});

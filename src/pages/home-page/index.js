@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { db } from '../../firebase'
 import { connect } from 'react-redux';
+import { setPosts } from '../../store/actions'
 
 class HomePage extends Component {
 
@@ -11,20 +12,16 @@ class HomePage extends Component {
     }
 
     componentDidMount() {
+        this.sendPostsData();
         this.readData();
-        console.log('---> home page', this.state)
-        if(this.props.user.user && this.props.user.user.email === 'admin@gmail.com'){
-            return (
-                this.props.history.push('/admin-page')
-            )
-        }
+    }
+
+    sendPostsData = async () => {
+        const { setPosts } = this.props;
+        await db.ref().on( 'child_added', snap => setPosts(snap.val()) );
     }
     
-    componentDidUpdate() {
-
-    }
-
-    readData = async () => {
+    readData = () => {
         const dbRefPosts = db.ref().child('posts');
         const title = dbRefPosts.child('title');
         title.on('child_added', snap => this.setState({ title: snap.val() }));
@@ -38,12 +35,6 @@ class HomePage extends Component {
         const { title, imgUrl, description } = this.state;
         return(
             <React.Fragment>
-                {
-                    console.log('--> state', this.state)
-                    // Object.keys(this.state).map((key, i) => {
-                    //     console.log('----> key', key)
-                    // })
-                }
                 <h3>{ title }</h3>
                 <img alt='alt' src={ imgUrl } />
                 <p>{ description }</p>
@@ -52,12 +43,12 @@ class HomePage extends Component {
     }
 }
 
-const mapStateToProps = ({ user }) => {
-    return { user }
+const mapStateToProps = ({ user, posts }) => {
+    return { user, posts }
 }
 
 const mapDispatchToProps = {
-    
+    setPosts
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(HomePage);

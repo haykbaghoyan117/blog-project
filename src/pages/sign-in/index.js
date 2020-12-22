@@ -33,7 +33,11 @@ class SignIn extends Component {
             .then(el => {
                 setUser(el.user)
             })
-            .then(() => this.props.history.push('/'))
+            .then(() => {
+                if(email === 'admin@gmail.com') {
+                    return this.props.history.push('/admin-page');
+                } return this.props.history.push('/');
+            })
             .catch(err => {
                 alert(err);
                 this.setState({
