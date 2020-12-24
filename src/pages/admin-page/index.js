@@ -26,7 +26,7 @@ class AdminPage extends Component {
         const { file } = this.state;
         const storageRef = storage.ref();
         const fileRef = storageRef.child(file.name);
-        await fileRef.put(file.name);
+        await fileRef.put(file);
         const fileUrl = await fileRef.getDownloadURL();
         await this.setState({ fileUrl });
         this.addData();
@@ -36,8 +36,9 @@ class AdminPage extends Component {
         const postId = `post${Math.floor(Math.random() * 1000000)}`;
         const { title, description, fileUrl } = this.state;
         await db.ref().child(postId).push({'title': title});
+        await db.ref().child(postId).push({'fileUrl': fileUrl});
         await db.ref().child(postId).push({'description': description});
-        await db.ref().child(postId).push({'fileUrl': fileUrl})
+        await db.ref().child(postId).push({'id': postId})
     }
 
     render() {

@@ -6,31 +6,18 @@ import Spinner from '../../components/spinner';
 
 class HomePage extends Component {
 
-    state = {
-        title: '',
-        imgUrl: null,
-        description: ''
-    }
-
     componentDidMount() {
-        this.sendPostsData();
-        // this.readData();
+        this.sendPostsData()
     }
 
     sendPostsData = async () => {
         const { setPosts } = this.props;
         await db.ref().on( 'value', snap => setPosts(snap.val()) );
     }
-    
-    // readData = () => {
-    //     const dbRefPosts = db.ref().child('posts');
-    //     const title = dbRefPosts.child('title');
-    //     title.on('child_added', snap => this.setState({ title: snap.val() }));
-    //     const imgUrl = dbRefPosts.child('imgUrl');
-    //     imgUrl.on('child_added', snap => this.setState({ imgUrl: snap.val() }));
-    //     const description = dbRefPosts.child('description');
-    //     description.on('child_added', snap => this.setState({ description: snap.val() }));
-    // }
+
+    deletePost = ({ target }) => {
+        console.log('+++++>', target.id)
+    }
   
     render() {
         const { posts } = this.props.posts;
@@ -51,7 +38,31 @@ class HomePage extends Component {
                                 }else if(el.fileUrl) {
                                     return <img alt='alt' src={ el.fileUrl } />
                                 }else if(el.description) {
-                                return <p>{ el.description }</p>
+                                    return <p>{ el.description }</p>
+                                }else if(el.id) {
+                                    return (
+                                        <div>
+                                            <form>
+                                                <input
+                                                    type='text'
+                                                    placeholder='Add comment'
+                                                />
+                                                <input
+                                                    className='btn btn-primary'
+                                                    type='button'
+                                                    placeholder='Add comment'
+                                                    value='Send'
+                                                />
+                                            </form>
+                                            <input
+                                                className='btn btn-danger'
+                                                type='button'
+                                                value='Delete post'
+                                                id={el.id}
+                                                onClick={this.deletePost}
+                                            />
+                                        </div>
+                                    )
                                 }
                             }
                         )
