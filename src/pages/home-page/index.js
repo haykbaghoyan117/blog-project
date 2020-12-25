@@ -1,63 +1,102 @@
 import React, { Component } from 'react';
 import { db } from '../../firebase'
 import { connect } from 'react-redux';
+import { setPosts } from '../../store/actions'
+import Spinner from '../../components/spinner';
 
 class HomePage extends Component {
 
     state = {
-        title: '',
-        imgUrl: null,
-        description: ''
+        comment: ''
     }
 
     componentDidMount() {
-        this.readData();
-        console.log('---> home page', this.state)
-        if(this.props.user.user && this.props.user.user.email === 'admin@gmail.com'){
-            return (
-                this.props.history.push('/admin-page')
-            )
-        }
-    }
-    
-    componentDidUpdate() {
-
+        this.sendPostsData()
     }
 
-    readData = async () => {
-        const dbRefPosts = db.ref().child('posts');
-        const title = dbRefPosts.child('title');
-        title.on('child_added', snap => this.setState({ title: snap.val() }));
-        const imgUrl = dbRefPosts.child('imgUrl');
-        imgUrl.on('child_added', snap => this.setState({ imgUrl: snap.val() }));
-        const description = dbRefPosts.child('description');
-        description.on('child_added', snap => this.setState({ description: snap.val() }));
+    sendPostsData = async () => {
+        const { setPosts } = this.props;
+        await db.ref().on( 'value', snap => setPosts(snap.val()) );
+    }
+
+    deletePost = async ({ target: {id} }) => {
+        await db.ref().child(id).remove();
+    }
+
+    handleChange = ({ target: {value} }) => {
+        this.setState({ comment: value })
+    }
+
+    addComment = (id) => (event) => {
+        event.preventDefault();
+        
     }
   
     render() {
-        const { title, imgUrl, description } = this.state;
+        const { posts } = this.props.posts;
+
+
         return(
-            <React.Fragment>
-                {
-                    console.log('--> state', this.state)
-                    // Object.keys(this.state).map((key, i) => {
-                    //     console.log('----> key', key)
-                    // })
-                }
-                <h3>{ title }</h3>
-                <img alt='alt' src={ imgUrl } />
-                <p>{ description }</p>
-            </React.Fragment>
+            <>
+            {
+                posts === null? (
+                    <Spinner />
+                )
+                :
+                (
+                    Object.values(posts).map(
+                        el => Object.values(el).map(
+                            el => {
+                                if(el.title) {
+                                    return <h3>{ el.title }</h3>
+                                }else if(el.fileUrl) {
+                                    return <img alt='alt' src={ el.fileUrl } />
+                                }else if(el.description) {
+                                    return <p>{ el.description }</p>
+                                }else if(el.id) {
+                                    return (
+                                        <div>
+                                            <form onSubmit={this.addComment(el.id)}>
+                                                <input
+                                                    type='text'
+                                                    placeholder='Add comment'
+                                                    onChange={this.handleChange}
+                                                    
+                                                    id={el.id}
+                                                />
+                                                <input
+                                                    className='btn btn-primary'
+                                                    type='submit'
+                                                    placeholder='Add comment'
+                                                    value='Send'
+                                                />
+                                            </form>
+                                            <input
+                                                className='btn btn-danger'
+                                                type='button'
+                                                value='Delete post'
+                                                id={el.id}
+                                                onClick={this.deletePost}
+                                            />
+                                        </div>
+                                    )
+                                }
+                            }
+                        )
+                    )
+                )
+            }
+            </>
         )
     }
 }
 
-const mapStateToProps = ({ user }) => {
-    return { user }
+const mapStateToProps = ({ user, posts }) => {
+    return { user, posts }
 }
 
 const mapDispatchToProps = {
-    
+    setPosts
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(HomePage);

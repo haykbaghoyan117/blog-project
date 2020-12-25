@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { db, storage } from "../../firebase";
+import { connect } from 'react-redux';
 import HomePage from '../home-page';
 
 class AdminPage extends Component {
@@ -9,18 +10,17 @@ class AdminPage extends Component {
         description: '',
         file: null,
         fileUrl: null
-    }
+    } 
 
     handleChange = ({ target: { value, id } }) => {
         this.setState({ [id]: value })
     }
 
     onFileChange = async (e) => {
-        const file = e.target.files[0];
+        const file = await e.target.files[0];
         this.setState({ file });
     }
     
-
     handleSubmit = async (e) => {
         e.preventDefault();
         const { file } = this.state;
@@ -33,17 +33,13 @@ class AdminPage extends Component {
     }
 
     addData = async () => {
+        const postId = `post${Math.floor(Math.random() * 1000000)}`;
         const { title, description, fileUrl } = this.state;
-        await db.ref().child('posts').child('title').push(title);
-        await db.ref().child('posts').child('description').push(description);
-        await db.ref().child('posts').child('imgUrl').push(fileUrl);
+        await db.ref().child(postId).push({'title': title});
+        await db.ref().child(postId).push({'fileUrl': fileUrl});
+        await db.ref().child(postId).push({'description': description});
+        await db.ref().child(postId).push({'id': postId})
     }
-
-    componentDidUpdate(prevProps, prevState) {
-        console.log('MMMMMMMMMMMM', this.state)
-    }
-
-
 
     render() {
         return (
@@ -77,4 +73,12 @@ class AdminPage extends Component {
         )
     }
 }
-export default AdminPage;
+const mapStateToProps = ({ posts }) => {
+    return ({ posts })
+}
+
+const mapDispatchToProps = {
+    
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(AdminPage);

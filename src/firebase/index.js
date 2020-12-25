@@ -28,34 +28,14 @@ export const writeUserData = (userId, name, email, imageUrl) => {
         profile_picture: imageUrl
     });
 }
-// export const userId = () => auth.currentUser.uid;
-// return db.ref('/users/' + userId).once('value').then((snapshot) => {
-//  const username = (snapshot.val() && snapshot.val().username) || 'Anonymous';
-//   // ...
-// });
+    
+    // readData = () => {
+    //     const dbRefPosts = db.ref().child('posts');
+    //     const title = dbRefPosts.child('title');
+    //     title.on('child_added', snap => this.setState({ title: snap.val() }));
+    //     const imgUrl = dbRefPosts.child('imgUrl');
+    //     imgUrl.on('child_added', snap => this.setState({ imgUrl: snap.val() }));
+    //     const description = dbRefPosts.child('description');
+    //     description.on('child_added', snap => this.setState({ description: snap.val() }));
+    // }
 
-// export const readData = () => {
-//     const name = db.ref('posts');
-//     name.on('value', (elem) => {
-//         this.setState({name: elem.val()})
-//     })
-// }
-
-
-
-
-
-
-
-
-// read data
-// export const dbRefObject = db.ref().child('object');
-// dbRefObject.on('value', snap => console.log('xxxxxxx', snap.val()));
-// const dbRefList = dbRefObject.child('//childi anuny');
-// dbRefList.on('')
-
-// const sendData = () => {
-//     const { key, value } = this.state;
-//     db.ref('key').push('value')
-// }
- 
