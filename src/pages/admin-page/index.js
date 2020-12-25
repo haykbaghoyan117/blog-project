@@ -33,12 +33,14 @@ class AdminPage extends Component {
     }
 
     addData = async () => {
-        const postId = `post${Math.floor(Math.random() * 1000000)}`;
+        const postId = `${Date.now()}`;
         const { title, description, fileUrl } = this.state;
-        await db.ref().child(postId).push({'title': title});
-        await db.ref().child(postId).push({'fileUrl': fileUrl});
-        await db.ref().child(postId).push({'description': description});
-        await db.ref().child(postId).push({'id': postId})
+        await db.ref().child(postId).push({
+            'title': title,
+            'fileUrl': fileUrl,
+            'description': description,
+            'id': postId
+        });
     }
 
     render() {

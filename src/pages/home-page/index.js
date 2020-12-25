@@ -47,21 +47,16 @@ class HomePage extends Component {
                     Object.values(posts).map(
                         el => Object.values(el).map(
                             el => {
-                                if(el.title) {
-                                    return <h3>{ el.title }</h3>
-                                }else if(el.fileUrl) {
-                                    return <img alt='alt' src={ el.fileUrl } />
-                                }else if(el.description) {
-                                    return <p>{ el.description }</p>
-                                }else if(el.id) {
                                     return (
                                         <div>
+                                            <h1>{ el.title }</h1>
+                                            <img alt='aly' src={ el.fileUrl } />
+                                            <p>{ el.description }</p>
                                             <form onSubmit={this.addComment(el.id)}>
                                                 <input
                                                     type='text'
                                                     placeholder='Add comment'
                                                     onChange={this.handleChange}
-                                                    
                                                     id={el.id}
                                                 />
                                                 <input
@@ -81,7 +76,7 @@ class HomePage extends Component {
                                         </div>
                                     )
                                 }
-                            }
+                            
                         )
                     )
                 )
