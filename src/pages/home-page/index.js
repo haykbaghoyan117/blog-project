@@ -29,7 +29,6 @@ class HomePage extends Component {
 
     addComment = (id) => (event) => {
         event.preventDefault();
-        
     }
   
     render() {
