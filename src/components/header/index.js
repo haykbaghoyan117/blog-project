@@ -5,8 +5,6 @@ import { connect } from 'react-redux';
 
 class Header extends Component {
     render() {
-    console.log("this.props", this.props)
-
         const { user } = this.props.user;
         return (
             <>

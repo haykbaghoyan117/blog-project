@@ -9,8 +9,10 @@ class AdminPage extends Component {
         title: '',
         description: '',
         file: null,
-        fileUrl: null
-    } 
+        fileUrl: null,
+        id: '',
+        categories: 'categories'
+    }
 
     handleChange = ({ target: { value, id } }) => {
         this.setState({ [id]: value })
@@ -32,14 +34,18 @@ class AdminPage extends Component {
         this.addData();
     }
 
+    createCategories = ({ target: {value} }) => {
+        this.setState({ categories: value })
+    }
+
     addData = async () => {
-        const postId = `${Date.now()}`;
-        const { title, description, fileUrl } = this.state;
-        await db.ref().child(postId).push({
+        const postId = `${100000000000000 - Date.now()}`;
+        const { title, description, fileUrl, categories } = this.state;
+        await db.ref(`${postId}/` + 'post').set({
             'title': title,
             'fileUrl': fileUrl,
             'description': description,
-            'id': postId
+            'categories': `categories${categories}`
         });
     }
 
@@ -49,25 +55,53 @@ class AdminPage extends Component {
                 <h1>ADMIN PAGE</h1>
                 <form action="" onSubmit={this.handleSubmit} >
                     <div className="form-group">
-                        <input type="text" className="form-control" value={this.state.title} placeholder="Your post title" id="title" onChange={this.handleChange} />
+                        <input
+                            type="text"
+                            className="form-control"
+                            value={this.state.title}
+                            placeholder="Your post title"
+                            id="title"
+                            onChange={this.handleChange}
+                        />
                     </div>
                     <div className="form-group">
-                        <input type="file" className="form-control" onChange={this.onFileChange} placeholder="img url" id="img" />
+                        <input
+                            type="file"
+                            className="form-control"
+                            onChange={this.onFileChange}
+                            placeholder="img url"
+                            id="img"
+                        />
                     </div>
                     <div className="form-group">
-                        <input type="text" className="form-control" value={this.state.description} placeholder="description" id="description" onChange={this.handleChange} />
+                        <input
+                            type="text"
+                            className="form-control"
+                            value={this.state.description}
+                            placeholder="description"
+                            id="description"
+                            onChange={this.handleChange}
+                        />
                     </div>
-                    {/* <img alt='jjj' src={this.state.fileUrl} /> */}
-                    {/* <div className="dropdown">
-                        <button className="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Post categoria
-                        </button>
+                    <div className="dropdown">
+                        <input
+                            className="btn btn-secondary dropdown-toggle"
+                            type="button"
+                            id="dropdownMenu2"
+                            data-toggle="dropdown"
+                            aria-haspopup="true"
+                            aria-expanded="false"
+                            value={`Categories: ${this.state.categories}`}
+                        />
                         <div className="dropdown-menu" aria-labelledby="dropdownMenu2">
-                            <button className="dropdown-item" type="button">Action</button>
-                            <button className="dropdown-item" type="button">Another action</button>
-                            <button className="dropdown-item" type="button">Something else here</button>
+                            <input className="dropdown-item" type="button" value='Animals' onClick={this.createCategories} />
+                            <input className="dropdown-item" type="button" value='Nature' onClick={this.createCategories} />
+                            <input className="dropdown-item" type="button" value='News' onClick={this.createCategories} />
+                            <input className="dropdown-item" type="button" value='Sport' onClick={this.createCategories} />
+                            <input className="dropdown-item" type="button" value='Cars' onClick={this.createCategories} />
+                            <input className="dropdown-item" type="button" value='Happy' onClick={this.createCategories} />
                         </div>
-                    </div> */}
+                    </div>
                     <button type="submit" className="btn btn-primary">Add post</button>
                 </form>
                 <HomePage />

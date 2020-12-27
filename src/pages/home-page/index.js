@@ -7,83 +7,127 @@ import Spinner from '../../components/spinner';
 class HomePage extends Component {
 
     state = {
-        comment: ''
+        comment: '',
+        displayName: '',
+        categories: ''
     }
 
     componentDidMount() {
-        this.sendPostsData()
+        this.sendPostsData();
+        if (this.props.user.user) {
+            this.setState({ displayName: this.props.user.user.displayName })
+        }
     }
 
     sendPostsData = async () => {
         const { setPosts } = this.props;
-        await db.ref().on( 'value', snap => setPosts(snap.val()) );
+        await db.ref().on('value', snap => setPosts(snap.val()));
     }
 
-    deletePost = async ({ target: {id} }) => {
+    deletePost = (id) => async () => {
         await db.ref().child(id).remove();
     }
 
-    handleChange = ({ target: {value} }) => {
+    handleChange = ({ target: { value } }) => {
         this.setState({ comment: value })
     }
 
-    addComment = (id) => (event) => {
-        event.preventDefault();
+    addComment = (id) => async (e) => {
+        e.preventDefault();
+        await db.ref().child(id).child('comments').push({
+            'displayName': this.state.displayName,
+            'comment': this.state.comment
+        });
+        this.setState({ comment: '' })
     }
-  
+
+    filterCategories = ({ target: {value} }) => {
+        this.setState({ categories: value})
+    }
+
     render() {
+        console.log(this.props)
         const { posts } = this.props.posts;
 
-
-        return(
+        return (
             <>
-            {
-                posts === null? (
-                    <Spinner />
-                )
-                :
-                (
-                    Object.values(posts).map(
-                        el => Object.values(el).map(
-                            el => {
+                <div className="dropdown">
+                    <input
+                        className="btn btn-secondary dropdown-toggle"
+                        type="button"
+                        id="dropdownMenu2"
+                        data-toggle="dropdown"
+                        aria-haspopup="true"
+                        aria-expanded="false"
+                        value={`Categories: ${this.state.categories}`}
+                    />
+                    <div className="dropdown-menu" aria-labelledby="dropdownMenu2">
+                        <input className="dropdown-item" type="button" value='All' onClick={this.filterCategories} />
+                        <input className="dropdown-item" type="button" value='Animals' onClick={this.filterCategories} />
+                        <input className="dropdown-item" type="button" value='Nature' onClick={this.filterCategories} />
+                        <input className="dropdown-item" type="button" value='News' onClick={this.filterCategories} />
+                        <input className="dropdown-item" type="button" value='Sport' onClick={this.filterCategories} />
+                        <input className="dropdown-item" type="button" value='Cars' onClick={this.filterCategories} />
+                        <input className="dropdown-item" type="button" value='Happy' onClick={this.filterCategories} />
+                    </div>
+                </div>
+                {
+                    posts === null ?
+                        (
+                            <Spinner />
+                        )
+                        :
+                        (
+                            Object.entries(posts).filter((item) => {
+                                return item[1].categories.indexOf(`${this.state.categories}`) > -1;
+                            }).map(
+                                ([key, el]) => {
                                     return (
-                                        <div>
-                                            <h1>{ el.title }</h1>
-                                            <img alt='aly' src={ el.fileUrl } />
-                                            <p>{ el.description }</p>
-                                            <form onSubmit={this.addComment(el.id)}>
+                                        <>
+                                            <div>
+                                                <h1>{el.post.title}</h1>
+                                                <img alt='alt' src={el.post.fileUrl} />
+                                                <p>{el.post.description}</p>
+                                                <input
+                                                    className='btn btn-danger'
+                                                    type='button'
+                                                    value='Delete post'
+                                                    onClick={this.deletePost(key)}
+                                                />
+                                            </div>
+                                            {el.comments !== undefined && Object.values(el.comments).map(com => {
+                                                return (
+                                                    <ul>
+                                                        <li>{com.displayName}</li>
+                                                        <li>{com.comment}</li>
+                                                    </ul>
+                                                )
+                                            })
+                                            } 
+                                            <form onSubmit={this.addComment(key)}>
                                                 <input
                                                     type='text'
                                                     placeholder='Add comment'
+                                                    value={this.state.comment}
                                                     onChange={this.handleChange}
-                                                    id={el.id}
                                                 />
                                                 <input
                                                     className='btn btn-primary'
                                                     type='submit'
-                                                    placeholder='Add comment'
                                                     value='Send'
                                                 />
                                             </form>
-                                            <input
-                                                className='btn btn-danger'
-                                                type='button'
-                                                value='Delete post'
-                                                id={el.id}
-                                                onClick={this.deletePost}
-                                            />
-                                        </div>
+                                        </>
                                     )
                                 }
-                            
+                            )
                         )
-                    )
-                )
-            }
+                }
             </>
         )
     }
 }
+
 
 const mapStateToProps = ({ user, posts }) => {
     return { user, posts }
