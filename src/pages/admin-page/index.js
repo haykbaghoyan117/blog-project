@@ -11,7 +11,7 @@ class AdminPage extends Component {
         file: null,
         fileUrl: null,
         id: '',
-        categories: 'categories'
+        categories: ''
     }
 
     handleChange = ({ target: { value, id } }) => {
@@ -45,7 +45,7 @@ class AdminPage extends Component {
             'title': title,
             'fileUrl': fileUrl,
             'description': description,
-            'categories': `categories${categories}`
+            'categories': categories
         });
     }
 

@@ -24,6 +24,8 @@ class HomePage extends Component {
         await db.ref().on('value', snap => setPosts(snap.val()));
     }
 
+    
+
     deletePost = (id) => async () => {
         await db.ref().child(id).remove();
     }
@@ -41,12 +43,13 @@ class HomePage extends Component {
         this.setState({ comment: '' })
     }
 
-    filterCategories = ({ target: {value} }) => {
-        this.setState({ categories: value})
+    filterCategories = async ({ target: {value} }) => {
+        const { setPosts } = this.props;
+        this.setState({ categories: value});
+        await db.ref().orderByChild('post/categories').equalTo(`${value}`).on('value', snap => setPosts(snap.val()));
     }
 
     render() {
-        console.log(this.props)
         const { posts } = this.props.posts;
 
         return (
@@ -78,9 +81,7 @@ class HomePage extends Component {
                         )
                         :
                         (
-                            Object.entries(posts).filter((item) => {
-                                return item[1].categories.indexOf(`${this.state.categories}`) > -1;
-                            }).map(
+                            Object.entries(posts).map(
                                 ([key, el]) => {
                                     return (
                                         <>
