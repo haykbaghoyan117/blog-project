@@ -14,6 +14,14 @@ class AdminPage extends Component {
         categories: ''
     }
 
+    componentDidMount() {
+        if(this.props.user.user && this.props.user.user.email !== 'admin@gmail.com') {
+            this.props.history.push('/sign-in');
+        }
+    }
+    
+
+
     handleChange = ({ target: { value, id } }) => {
         this.setState({ [id]: value })
     }
@@ -109,8 +117,8 @@ class AdminPage extends Component {
         )
     }
 }
-const mapStateToProps = ({ posts }) => {
-    return ({ posts })
+const mapStateToProps = ({ posts, user }) => {
+    return ({ posts, user })
 }
 
 const mapDispatchToProps = {

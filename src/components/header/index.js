@@ -4,8 +4,22 @@ import { signOut } from '../../firebase';
 import { connect } from 'react-redux';
 
 class Header extends Component {
+
+    state = {
+        link: '/'
+    }
+
+    // componentDidMount() {
+    //     const { user } = this.props.user;
+    //     if(user && user.email === 'admin@gmail.com') {
+    //         this.setState({ link: '/admin-page'})
+    //     }
+    // }
+    
+    
     render() {
         const { user } = this.props.user;
+        console.log('iiiiiiiiiiiiii', this.state)
         return (
             <>
                 {
@@ -31,9 +45,13 @@ class Header extends Component {
                     )
                     :
                     (
-                        <nav className="navbar navbar-expand-md bg-dark navbar-dark">
+                    <nav className="navbar navbar-expand-md bg-dark navbar-dark">
 
-                        <Link className="navbar-brand" to='/'>Home</Link>
+                        <Link
+                            className="navbar-brand"
+                            to={user && user.email === 'admin@gmail.com'? '/admin-page' : '/' }>
+                            Home
+                        </Link>
                         <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
                             <span className="navbar-toggler-icon"></span>
                         </button>

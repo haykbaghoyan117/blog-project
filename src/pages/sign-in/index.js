@@ -13,11 +13,6 @@ class SignIn extends Component {
     componentDidMount() {
 
     }
-    
-
-    componentDidUpdate(prevProps, prevState) {
-        // console.log(this.props.user)
-    }
 
     handleChange = ({ target: {value, id}}) => {
         this.setState({
@@ -26,7 +21,7 @@ class SignIn extends Component {
     }
 
     handleSubmit = (e) => {
-        const { setUser } = this.props
+        const { setUser } = this.props;
         e.preventDefault();
         const { email, password } = this.state;
         return signInWithEmailAndPassword(email, password)
@@ -34,9 +29,7 @@ class SignIn extends Component {
                 setUser(el.user)
             })
             .then(() => {
-                if(email === 'admin@gmail.com') {
-                    return this.props.history.push('/admin-page');
-                } return this.props.history.push('/');
+                return this.props.history.push('/');
             })
             .catch(err => {
                 alert(err);

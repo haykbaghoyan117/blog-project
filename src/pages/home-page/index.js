@@ -13,9 +13,14 @@ class HomePage extends Component {
     }
 
     componentDidMount() {
+        const { user } = this.props.user;
         this.sendPostsData();
-        if (this.props.user.user) {
-            this.setState({ displayName: this.props.user.user.displayName })
+        if(user && user.email === 'admin@gmail.com') {
+            console.log('WWWWWWWWWWWWWWW', this.props.history)
+            this.props.history.push('/admin-page');
+        }
+        if (user) {
+            this.setState({ displayName: user.displayName })
         }
     }
 
@@ -45,8 +50,10 @@ class HomePage extends Component {
 
     filterCategories = async ({ target: {value} }) => {
         const { setPosts } = this.props;
-        this.setState({ categories: value});
-        await db.ref().orderByChild('post/categories').equalTo(`${value}`).on('value', snap => setPosts(snap.val()));
+        await this.setState({ categories: value});
+        if(this.state.categories === 'All') {
+            return await db.ref().on('value', snap => setPosts(snap.val()));
+        } else return await db.ref().orderByChild('post/categories').equalTo(`${value}`).on('value', snap => setPosts(snap.val()));
     }
 
     render() {
