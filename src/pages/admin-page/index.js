@@ -16,7 +16,8 @@ class AdminPage extends Component {
 
     componentDidMount() {
         if(this.props.user.user && this.props.user.user.email !== 'admin@gmail.com') {
-            this.props.history.push('/sign-in');
+            console.log('111111')
+            return this.props.history.push('/sign-in');
         }
     }
     

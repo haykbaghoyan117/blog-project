@@ -13,8 +13,8 @@ import { connect } from 'react-redux';
 import { setUser } from "./store/actions";
 
 class App extends Component {
-    componentDidMount() {
-        auth.onAuthStateChanged((authUser) => this.props.setUser(authUser));
+    async componentDidMount() {
+        await auth.onAuthStateChanged(authUser => this.props.setUser(authUser));
     }
     render() {
         return(

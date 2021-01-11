@@ -15,12 +15,8 @@ class HomePage extends Component {
     componentDidMount() {
         const { user } = this.props.user;
         this.sendPostsData();
-        if(user && user.email === 'admin@gmail.com') {
-            console.log('WWWWWWWWWWWWWWW', this.props.history)
-            this.props.history.push('/admin-page');
-        }
-        if (user) {
-            this.setState({ displayName: user.displayName })
+        if(user) {
+            return this.setState({ displayName: user.displayName })
         }
     }
 
@@ -28,8 +24,6 @@ class HomePage extends Component {
         const { setPosts } = this.props;
         await db.ref().on('value', snap => setPosts(snap.val()));
     }
-
-    
 
     deletePost = (id) => async () => {
         await db.ref().child(id).remove();
@@ -138,7 +132,10 @@ class HomePage extends Component {
 
 
 const mapStateToProps = ({ user, posts }) => {
-    return { user, posts }
+    return {
+        user,
+        posts
+    }
 }
 
 const mapDispatchToProps = {
