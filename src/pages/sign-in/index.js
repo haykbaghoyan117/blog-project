@@ -27,9 +27,7 @@ class SignIn extends Component {
         return signInWithEmailAndPassword(email, password)
             .then(el => {
                 setUser(el.user);
-                if(el.user.email === 'admin@gmail.com') {
-                    return this.props.history.push('/admin-page');
-                }else return this.props.history.push('/');
+                this.props.history.push('/');
             })
             .catch(err => {
                 alert(err);

@@ -1,128 +1,55 @@
 import React, { Component } from 'react';
-import { db } from '../../firebase'
+import { db } from '../../firebase';
 import { connect } from 'react-redux';
-import { setPosts } from '../../store/actions'
-import Spinner from '../../components/spinner';
+import { setPosts, setPost, selectionPost } from '../../store/actions';
+import FormPost from '../../components/form-post';
+import SearchCategories from '../../components/search-categories';
+import AdminAddForm from '../../components/admin-add-form';
 
 class HomePage extends Component {
 
-    state = {
-        comment: '',
-        displayName: '',
-        categories: ''
+    componentDidMount() {
+        this.props.setPost(null);
+        this.sendPostsData();
     }
 
-    componentDidMount() {
-        const { user } = this.props.user;
-        this.sendPostsData();
-        if(user) {
-            return this.setState({ displayName: user.displayName })
+    componentDidUpdate(prevProps, prevState) {
+        if(this.props.post.post !== null) {
+            this.props.history.push('profile-page');
+            const { post } = this.props.post;
+            const { selectionPost } = this.props;
+            db.ref().orderByKey().equalTo(`${post}`).on('value', snap => this.setState(selectionPost(snap.val())));
         }
     }
+    
 
     sendPostsData = async () => {
         const { setPosts } = this.props;
         await db.ref().on('value', snap => setPosts(snap.val()));
     }
 
-    deletePost = (id) => async () => {
-        await db.ref().child(id).remove();
-    }
-
-    handleChange = ({ target: { value } }) => {
-        this.setState({ comment: value })
-    }
-
-    addComment = (id) => async (e) => {
-        e.preventDefault();
-        await db.ref().child(id).child('comments').push({
-            'displayName': this.state.displayName,
-            'comment': this.state.comment
-        });
-        this.setState({ comment: '' })
-    }
-
-    filterCategories = async ({ target: {value} }) => {
-        const { setPosts } = this.props;
-        await this.setState({ categories: value});
-        if(this.state.categories === 'All') {
-            return await db.ref().on('value', snap => setPosts(snap.val()));
-        } else return await db.ref().orderByChild('post/categories').equalTo(`${value}`).on('value', snap => setPosts(snap.val()));
-    }
-
     render() {
-        const { posts } = this.props.posts;
 
+        const { posts } = this.props.posts;
+        const { user } = this.props.user;
         return (
             <>
-                <div className="dropdown">
-                    <input
-                        className="btn btn-secondary dropdown-toggle"
-                        type="button"
-                        id="dropdownMenu2"
-                        data-toggle="dropdown"
-                        aria-haspopup="true"
-                        aria-expanded="false"
-                        value={`Categories: ${this.state.categories}`}
-                    />
-                    <div className="dropdown-menu" aria-labelledby="dropdownMenu2">
-                        <input className="dropdown-item" type="button" value='All' onClick={this.filterCategories} />
-                        <input className="dropdown-item" type="button" value='Animals' onClick={this.filterCategories} />
-                        <input className="dropdown-item" type="button" value='Nature' onClick={this.filterCategories} />
-                        <input className="dropdown-item" type="button" value='News' onClick={this.filterCategories} />
-                        <input className="dropdown-item" type="button" value='Sport' onClick={this.filterCategories} />
-                        <input className="dropdown-item" type="button" value='Cars' onClick={this.filterCategories} />
-                        <input className="dropdown-item" type="button" value='Happy' onClick={this.filterCategories} />
-                    </div>
-                </div>
                 {
-                    posts === null ?
+                    user?.email === 'admin@gmail.com' ?
                         (
-                            <Spinner />
+                            <>
+                                <AdminAddForm />
+                                <SearchCategories />
+                                <FormPost posts={posts} />
+
+                            </>
                         )
                         :
                         (
-                            Object.entries(posts).map(
-                                ([key, el]) => {
-                                    return (
-                                        <>
-                                            <div>
-                                                <h1>{el.post.title}</h1>
-                                                <img alt='alt' src={el.post.fileUrl} />
-                                                <p>{el.post.description}</p>
-                                                <input
-                                                    className='btn btn-danger'
-                                                    type='button'
-                                                    value='Delete post'
-                                                    onClick={this.deletePost(key)}
-                                                />
-                                            </div>
-                                            {el.comments !== undefined && Object.values(el.comments).map(com => {
-                                                return (
-                                                    <ul>
-                                                        <li>{com.displayName}</li>
-                                                        <li>{com.comment}</li>
-                                                    </ul>
-                                                )
-                                            })
-                                            } 
-                                            <form onSubmit={this.addComment(key)}>
-                                                <input
-                                                    type='text'
-                                                    placeholder='Add comment'
-                                                    value={this.state.comment}
-                                                    onChange={this.handleChange}
-                                                />
-                                                <input
-                                                    className='btn btn-primary'
-                                                    type='submit'
-                                                    value='Send'
-                                                />
-                                            </form>
-                                        </>
-                                    )
-                                }
-                            )
+                            <>
+                                <SearchCategories />
+                                <FormPost posts={posts} />
+                            </>
                         )
                 }
             </>
@@ -131,15 +58,14 @@ class HomePage extends Component {
 }
 
 
-const mapStateToProps = ({ user, posts }) => {
-    return {
-        user,
-        posts
-    }
+const mapStateToProps = ({ posts, user, post }) => {
+    return { posts, user, post }
 }
 
 const mapDispatchToProps = {
-    setPosts
+    setPosts,
+    setPost,
+    selectionPost
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(HomePage);

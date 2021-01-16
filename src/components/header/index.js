@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Link } from "react-router-dom";
 import { signOut } from '../../firebase';
 import { connect } from 'react-redux';
+import './style.css';
 
 class Header extends Component {
 
@@ -9,17 +10,16 @@ class Header extends Component {
         link: '/'
     }
 
-    // componentDidMount() {
-    //     const { user } = this.props.user;
-    //     if(user && user.email === 'admin@gmail.com') {
-    //         this.setState({ link: '/admin-page'})
-    //     }
-    // }
+    componentDidMount() {
+        const { user } = this.props.user;
+        if(user && user.email === 'admin@gmail.com') {
+            this.setState({ link: '/admin-page'})
+        }
+    }
     
     
     render() {
         const { user } = this.props.user;
-        console.log('iiiiiiiiiiiiii', this.state)
         return (
             <>
                 {
@@ -49,8 +49,12 @@ class Header extends Component {
 
                         <Link
                             className="navbar-brand"
-                            to={user && user.email === 'admin@gmail.com'? '/admin-page' : '/' }>
-                            Home
+                            to='/'>
+                            Home  
+
+
+
+                            
                         </Link>
                         <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
                             <span className="navbar-toggler-icon"></span>
@@ -83,7 +87,6 @@ const mapStateToProps = ({ user }) => {
 }
 
 const mapDispatchToProps = {
-    
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Header);
