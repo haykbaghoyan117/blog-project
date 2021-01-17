@@ -1,0 +1,73 @@
+.admin-add-form {
+    background-color: #838996;
+    color: white;
+    background-image: url(../../images/lam.jpg);
+    padding: 20px;
+    margin: 0 auto;
+    margin-top: 20px;
+    max-width: 500px;
+    width: 100%;
+    border-style: solid;
+    border-radius: 15px;
+    border-width: 5px;
+    border-color: black;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 5);
+}
+
+.admin-title {
+    background-color: #838996;
+    background-image: url(../../images/lam.jpg);
+}
+
+.admin-form div input {
+    color: white;
+    background-image: url(../../images/lam.jpg);
+}
+
+.admin-form div input::placeholder {
+    color: white;
+}
+
+.admin-form div input:hover {
+    background-image: url(../../images/body_bg_new.jpg);
+}
+
+.admin-form div input:focus {
+    color: white;
+    background-image: url(../../images/body_bg_new.jpg);
+}
+
+.admin-input-file {
+}
+
+.admin-form div button:hover {
+    background-image: url(../../images/body_bg_new.jpg);
+}
+
+.admin-button {
+    display: flex;
+}
+
+.admin-right-button:hover {
+    background-image: url(../../images/body_bg_new.jpg);
+}
+.admin-right-button {
+    margin-left: 20px;
+    color: white;
+    background-image: url(../../images/lam.jpg);
+}
+.collapse-button{
+    display: block;
+    width: 100%;
+    margin-top: 10px;
+    background-image: url(../../images/lam.jpg);
+    border-radius: 10px;
+}
+
+.collapse-button:hover {
+    background-image: url(../../images/body_bg_new.jpg);
+}
+
+.collapse-button i {
+    color: white;
+}

@@ -1,5 +1,6 @@
-import React, { Children, Component } from 'react';
+import React, { Component } from 'react';
 import { signUpWithEmailAndPassword } from "../../firebase";
+import './style.css';
 
 class SignUp extends Component {
 
@@ -42,7 +43,7 @@ class SignUp extends Component {
     render() {
         const { email, password, name } = this.state;
         return (
-            <div>
+            <div className='sign-up'>
                 <h3>Sign Up</h3>
                 <form onSubmit={this.handleSubmit}>
                     <div className="form-group">
@@ -57,7 +58,7 @@ class SignUp extends Component {
                         <label htmlFor="password">Password:</label>
                         <input type="password" className="form-control" id="password" value={password} onChange={this.handleChange} />
                     </div>
-                    <button type="submit" className="btn btn-success">Submit</button>
+                    <button type="submit" className="btn btn-secondary">Submit</button>
                 </form>
             </div>
         )

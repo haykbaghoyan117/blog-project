@@ -1,0 +1,59 @@
+.form-img {
+    width: 180px !important;
+    height: 240px;
+    margin: 50px;
+}
+
+.form-style {
+    /* width: 80%; */
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+    margin-top: 30px;
+    display: flex;
+}
+
+.all-form {
+    width: 100%;
+    background-image: url(../../images/lam.jpg);
+}
+.ramka{
+    width: 100%;
+    position: absolute;
+}
+.lent{
+    width: 100px;
+    background-color: transparent;
+    transform: rotate(135deg);
+    border: 20px solid transparent;
+     border-bottom: 20px solid black;
+    position: absolute;
+    right: 7.5%;
+    bottom: 15%;
+}
+.super-ramka {
+    background-image: url(../../images/ramk39-min.png);
+    background-repeat: no-repeat;
+    background-size:contain ;
+    background-position: center;
+    position: relative;
+}
+
+.all-posts {
+    display: flex;
+    justify-content: center;
+    position: relative;
+
+    width: 100%;
+    min-height: auto;
+    /* background-image: url(../../images/ramk39-min.png); */
+  
+    /* background: linear-gradient(to right, #959595 0%, #0D0D0D 46%, #010101 50%, #0A0A0A 53%, #4E4E4E 76%, #383838 87%, #1B1B1B 100%); */
+}
+
+.post-details {
+    width: 60%;
+    background-image: url(../../images/body_bg_new.jpg);
+}
+
+.post-details:hover {
+    background-image: url(../../images/lam.jpg);
+}

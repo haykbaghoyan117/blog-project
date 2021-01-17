@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { db, storage } from "../../firebase";
+import "./style.css";
 
 class AdminAddForm extends Component {
 
@@ -9,7 +10,8 @@ class AdminAddForm extends Component {
         file: null,
         fileUrl: null,
         id: '',
-        categories: ''
+        categories: '',
+        collapse: false
     }
 
     handleChange = ({ target: { value, id } }) => {
@@ -20,7 +22,7 @@ class AdminAddForm extends Component {
         const file = await e.target.files[0];
         this.setState({ file });
     }
-    
+
     handleSubmit = async (e) => {
         e.preventDefault();
         const { file } = this.state;
@@ -32,7 +34,7 @@ class AdminAddForm extends Component {
         this.addData();
     }
 
-    createCategories = ({ target: {value} }) => {
+    createCategories = ({ target: { value } }) => {
         this.setState({ categories: value })
     }
 
@@ -46,63 +48,77 @@ class AdminAddForm extends Component {
             'categories': categories
         });
     }
+    handleCollapse = () => {
+        this.setState({ collapse: !this.state.collapse })
+    }
 
     render() {
         return (
-            <>
-                <h1>ADMIN PAGE</h1>
-                <form action="" onSubmit={this.handleSubmit} >
-                    <div className="form-group">
-                        <input
-                            type="text"
-                            className="form-control"
-                            value={this.state.title}
-                            placeholder="Your post title"
-                            id="title"
-                            onChange={this.handleChange}
-                        />
-                    </div>
-                    <div className="form-group">
-                        <input
-                            type="file"
-                            className="form-control"
-                            onChange={this.onFileChange}
-                            placeholder="img url"
-                            id="img"
-                        />
-                    </div>
-                    <div className="form-group">
-                        <input
-                            type="text"
-                            className="form-control"
-                            value={this.state.description}
-                            placeholder="description"
-                            id="description"
-                            onChange={this.handleChange}
-                        />
-                    </div>
-                    <div className="dropdown">
-                        <input
-                            className="btn btn-secondary dropdown-toggle"
-                            type="button"
-                            id="dropdownMenu2"
-                            data-toggle="dropdown"
-                            aria-haspopup="true"
-                            aria-expanded="false"
-                            value={`Categories: ${this.state.categories}`}
-                        />
-                        <div className="dropdown-menu" aria-labelledby="dropdownMenu2">
-                            <input className="dropdown-item" type="button" value='Animals' onClick={this.createCategories} />
-                            <input className="dropdown-item" type="button" value='Nature' onClick={this.createCategories} />
-                            <input className="dropdown-item" type="button" value='News' onClick={this.createCategories} />
-                            <input className="dropdown-item" type="button" value='Sport' onClick={this.createCategories} />
-                            <input className="dropdown-item" type="button" value='Cars' onClick={this.createCategories} />
-                            <input className="dropdown-item" type="button" value='Happy' onClick={this.createCategories} />
-                        </div>
-                    </div>
-                    <button type="submit" className="btn btn-primary">Add post</button>
-                </form>
-            </>
+            <div className='admin-add-form'>
+
+                {
+                    this.state.collapse && (
+                        <>
+                            <h1 className='admin-title'>Add new post</h1>
+                            <form className='admin-form' action="" onSubmit={this.handleSubmit} >
+                                <div className="form-group">
+                                    <input
+                                        type="text"
+                                        className="form-control admin-input"
+                                        value={this.state.title}
+                                        placeholder="Your post title"
+                                        id="title"
+                                        onChange={this.handleChange}
+                                    />
+                                </div>
+                                <div className="form-group">
+                                    <input
+                                        type="file"
+                                        className="form-control admin-input-file"
+                                        onChange={this.onFileChange}
+                                        placeholder="img url"
+                                        id="img"
+                                    />
+                                </div>
+                                <div className="form-group">
+                                    <input
+                                        type="text"
+                                        className="form-control admin-input"
+                                        value={this.state.description}
+                                        placeholder="description"
+                                        id="description"
+                                        onChange={this.handleChange}
+                                    />
+                                </div>
+                                <div className='admin-button'>
+                                    <div className="dropdown">
+                                        <input
+                                            className="btn btn-secondary dropdown-toggle"
+                                            type="button"
+                                            id="dropdownMenu2"
+                                            data-toggle="dropdown"
+                                            aria-haspopup="true"
+                                            aria-expanded="false"
+                                            value={`Categories: ${this.state.categories}`}
+                                        />
+                                        <div className="dropdown-menu" aria-labelledby="dropdownMenu2">
+                                            <input className="dropdown-item" type="button" value='Animals' onClick={this.createCategories} />
+                                            <input className="dropdown-item" type="button" value='Nature' onClick={this.createCategories} />
+                                            <input className="dropdown-item" type="button" value='News' onClick={this.createCategories} />
+                                            <input className="dropdown-item" type="button" value='Sport' onClick={this.createCategories} />
+                                            <input className="dropdown-item" type="button" value='Cars' onClick={this.createCategories} />
+                                            <input className="dropdown-item" type="button" value='Happy' onClick={this.createCategories} />
+                                        </div>
+                                    </div>
+                                    <button type="submit" className="btn btn-secondary admin-right-button">Add post</button>
+                                </div>
+                            </form>
+                        </>
+                    )
+                }
+                <button className="collapse-button" onClick={this.handleCollapse}> {this.state.collapse ? <i class="fas fa-chevron-up"></i>: <i>"Add new post"</i>}</button>
+
+            </div>
         )
     }
 }

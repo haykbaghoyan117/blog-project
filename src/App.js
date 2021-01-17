@@ -27,6 +27,7 @@ class App extends Component {
                         <Route path='/sign-in' exact component={SignIn} />
                         <Route path='/change-profile' exact component={ChangeProfile} />
                         <Route path='/profile-page' exact component={ProfilePage} />
+                        <Route path='/profile-page/:id' exact component={ProfilePage} />
                         <Route path='/admin-page' exact component={AdminPage} />
                     </Switch>
                     <Footer />

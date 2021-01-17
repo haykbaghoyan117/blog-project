@@ -1,17 +1,14 @@
 import React, { Component } from 'react';
 import { signInWithEmailAndPassword } from "../../firebase";
 import { connect } from 'react-redux';
-import { setUser } from '../../store/actions'
+import { setUser } from '../../store/actions';
+import './style.css';
 
 class SignIn extends Component {
 
     state = {
         email: '',
         password: ''
-    }
-
-    componentDidMount() {
-
     }
 
     handleChange = ({ target: {value, id}}) => {
@@ -41,7 +38,7 @@ class SignIn extends Component {
     render() {
         const { email, password } = this.state;
         return (
-            <div>
+            <div className='sign-in'>
                 <h3>Sign In</h3>
                 <form onSubmit={this.handleSubmit}>
                     <div className="form-group">
@@ -52,7 +49,7 @@ class SignIn extends Component {
                         <label htmlFor="password">Password:</label>
                         <input type="password" className="form-control" id="password" value={password} onChange={this.handleChange} />
                     </div>
-                    <button type="submit" className="btn btn-success">Submit</button>
+                    <button type="submit" className="btn btn-secondary">Submit</button>
                 </form>
             </div>
         )

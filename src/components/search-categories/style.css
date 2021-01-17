@@ -1,0 +1,30 @@
+.search-categories {
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
+}
+
+.search-categories div input:hover {
+    background-image: url(../../images/body_bg_new.jpg);
+    color: white;
+}
+
+.search-categories div div {
+    background-image: url(../../images/lam.jpg);
+}
+
+.search-categories div div input {
+    color: white;
+}
+
+.search-button {
+    background-image: url(../../images/lam.jpg);
+    width: 500px;
+    display: flex;
+    align-self: center;
+}
+
+.variant-button input {
+    width: 500px;
+    text-align: center;
+}
