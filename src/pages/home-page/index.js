@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { db } from '../../firebase';
 import { connect } from 'react-redux';
-import { setPosts, setPost, selectionPost } from '../../store/actions';
+import { setPosts, setPost, setSelectionPost } from '../../store/actions';
 import FormPost from '../../components/form-post';
 import SearchCategories from '../../components/search-categories';
 import AdminAddForm from '../../components/admin-add-form';
@@ -18,7 +18,7 @@ class HomePage extends Component {
             this.props.history.push('profile-page');
             const { post } = this.props.post;
             const { selectionPost } = this.props;
-            db.ref().orderByKey().equalTo(`${post}`).on('value', snap => this.setState(selectionPost(snap.val())));
+            db.ref().orderByKey().equalTo(`${post}`).on('value', snap => this.setState(setSelectionPost(snap.val())));
         }
     }
     
@@ -65,7 +65,7 @@ const mapStateToProps = ({ posts, user, post }) => {
 const mapDispatchToProps = {
     setPosts,
     setPost,
-    selectionPost
+    setSelectionPost
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(HomePage);

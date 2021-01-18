@@ -23,8 +23,8 @@ class App extends Component {
                     <Header />
                     <Switch>
                         <Route path='/' exact component={HomePage} />
-                        <Route path='/sign-up' exact component={SignUp} />
-                        <Route path='/sign-in' exact component={SignIn} />
+                        <Route path='/sign-up' component={SignUp} />
+                        <Route path='/sign-in' component={SignIn} />
                         <Route path='/change-profile' exact component={ChangeProfile} />
                         <Route path='/profile-page' exact component={ProfilePage} />
                         <Route path='/profile-page/:id' exact component={ProfilePage} />

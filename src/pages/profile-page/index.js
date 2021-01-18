@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { db } from '../../firebase';
 import { connect } from 'react-redux';
-import { setPosts, randPosts } from "../../store/actions";
+import { setPosts, randPosts, setSelectionPost } from "../../store/actions";
 import Spinner from '../../components/spinner';
 import FormPost from '../../components/form-post';
 
@@ -10,10 +10,14 @@ class ProfilePage extends Component {
         state = {
             comment: '',
             post: null,
-            emptyPost: false
+            emptyPost: false,
+            display: 'none'
         }
 
         async componentDidMount() {
+            if(this.props.user?.user?.email === 'admin@gmail.com') {
+                this.setState({ display: 'block'})
+            }
             if(this.props.match.params.id) {
                 await db.ref().orderByKey().equalTo(`${this.props.match.params.id}`).on('value', snap => {
                     if(snap.val()) {
@@ -68,6 +72,7 @@ class ProfilePage extends Component {
                             type='button'
                             value='Delete post'
                             onClick={this.deletePost(this.props.match.params.id)}
+                            style={{ display: this.state.display }}
                         />
                     </div>
                 )
@@ -116,7 +121,8 @@ const mapStateToProps = ({ user, posts, post, selectionPost, randPosts }) => {
 
 const mapDispatchToProps = {
     setPosts,
-    randPosts
+    randPosts,
+    setSelectionPost
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProfilePage);

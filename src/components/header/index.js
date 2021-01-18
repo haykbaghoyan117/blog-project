@@ -16,6 +16,12 @@ class Header extends Component {
             this.setState({ link: '/admin-page'})
         }
     }
+
+    componentDidUpdate(prevProps, prevState) {
+        
+        console.log('xxxxxxxxxxx', this.props)
+    }
+    
     
     
     render() {
@@ -58,10 +64,10 @@ class Header extends Component {
                         <div className="collapse navbar-collapse" id="collapsibleNavbar">
                             <ul className="navbar-nav">
                                 <li className="nav-item">
-                                    <Link className="nav-link" to='profile-page'>Profile({user.displayName})</Link>
+                                    <Link className="nav-link" to={`/profile-page/${this.props.selectionPost.selectionPost}`}>Profile({user.displayName})</Link>
                                 </li>
                                 <li className="nav-item">
-                                    <Link className="nav-link" to='sign-in' onClick={signOut}>SignOut</Link>
+                                    <Link className="nav-link" to='/' onClick={signOut}>SignOut</Link>
                                 </li>
                             </ul>
                         </div>
@@ -78,8 +84,8 @@ class Header extends Component {
         )
     }
 }
-const mapStateToProps = ({ user }) => {
-    return { user }
+const mapStateToProps = ({ user, selectionPost }) => {
+    return { user, selectionPost }
 }
 
 const mapDispatchToProps = {

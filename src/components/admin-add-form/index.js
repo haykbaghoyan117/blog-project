@@ -63,6 +63,7 @@ class AdminAddForm extends Component {
                             <form className='admin-form' action="" onSubmit={this.handleSubmit} >
                                 <div className="form-group">
                                     <input
+                                        required
                                         type="text"
                                         className="form-control admin-input"
                                         value={this.state.title}
@@ -73,6 +74,7 @@ class AdminAddForm extends Component {
                                 </div>
                                 <div className="form-group">
                                     <input
+                                        required
                                         type="file"
                                         className="form-control admin-input-file"
                                         onChange={this.onFileChange}
@@ -82,6 +84,7 @@ class AdminAddForm extends Component {
                                 </div>
                                 <div className="form-group">
                                     <input
+                                        required
                                         type="text"
                                         className="form-control admin-input"
                                         value={this.state.description}

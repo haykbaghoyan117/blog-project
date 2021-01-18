@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Spinner from '../spinner';
 import { Link } from "react-router-dom";
-import { setPost } from '../../store/actions';
+import { setPost, setSelectionPost } from '../../store/actions';
 import { connect } from "react-redux";
 import "./style.css";
 
@@ -25,11 +25,14 @@ class FormPost extends Component {
                             {
                                 Object.entries(this.props.posts).map(
                                     ([key, el]) => {
+                                        this.props.setSelectionPost(key);
                                         return (
                                             <div className='col-md-4 all-posts'>
                                                 <div className="card-columns form-style">
                                                     <div className="card all-form">
-                                                        <h2>{el.post.title}</h2>
+                                                        <div>
+                                                            <h4>{el.post.title}</h4>
+                                                        </div>
                                                         <div className='super-ramka'>
                                                             <div className="lent"/>
                                                             <img className="card-img-top form-img" src={el.post.fileUrl} alt="Card image" />
@@ -59,7 +62,7 @@ const mapStateToProps = ({ post }) => {
 }
 
 const mapDispatchToProps = {
-    setPost
+    setSelectionPost
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(FormPost);
