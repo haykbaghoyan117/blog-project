@@ -11,14 +11,25 @@ class ProfilePage extends Component {
             comment: '',
             post: null,
             emptyPost: false,
-            display: 'none'
+            display: 'none',
+            rndNumber: 0,
+            id: '',
+            i: 3,
+            treePosts = {}
         }
 
         async componentDidMount() {
+
+            
+            if(this.props.posts) {
+                this.setState({ rndNumber: Object.keys(this.props.posts).length })
+            }
+            
             if(this.props.user?.user?.email === 'admin@gmail.com') {
                 this.setState({ display: 'block'})
             }
             if(this.props.match.params.id) {
+                this.setState({ id: this.props.match.params.id, i: 4 });
                 await db.ref().orderByKey().equalTo(`${this.props.match.params.id}`).on('value', snap => {
                     if(snap.val()) {
                         this.setState({ post:snap.val()[this.props.match.params.id], emptyPost: false });
@@ -51,11 +62,16 @@ class ProfilePage extends Component {
         }
 
     render() {
-        // console.log(this.props.match.params.id)
-        // const numberOfPosts = 6;
-        // const randomIndex = Math.floor(Math.random() * numberOfPosts);
-        // db.ref.limitToFirst(randomIndex).limitToLast(3).once('value').then(snapshot => randPosts(snapshot.val()));
-        console.log(this.state)
+        const obj = new Object();
+        const numberOfPosts = Object.keys(this.props.posts).length;
+        for( const i of numberOfPosts ) {
+            const randomIndex = Math.floor(Math.random() * numberOfPosts);
+            const idx = Object.getOwnPropertyNames(this.props.posts)[ randomIndex ];
+            let k = 0;
+            if( idx !== this.props.match.params.id ) {
+                obj.idx = this.props.posts.posts[idx]
+            }
+        }
         return(
             <>
             {this.state.emptyPost &&  <h1>Has not selection post</h1>}
@@ -107,7 +123,50 @@ class ProfilePage extends Component {
                 )
             }
 
+
+
+
+
+
                 {/* <FormPost posts={this.props.randPosts} /> */}
+{/* 
+                (
+                    <Spinner />
+                )
+                :
+                (
+                    <div className='container-fluid'>
+                        <div className='row'>
+                            {
+                                Object.entries(this.props.posts).map(
+                                    ([key, el]) => {
+                                        this.props.setSelectionPost(key);
+                                        return (
+                                            <div className='col-md-4 all-posts'>
+                                                <div className="card-columns form-style">
+                                                    <div className="card all-form">
+                                                        <div>
+                                                            <h4>{el.post.title}</h4>
+                                                        </div>
+                                                        <div className='super-ramka'>
+                                                            <div className="lent"/>
+                                                            <img className="card-img-top form-img" src={el.post.fileUrl} alt="Card image" />
+                                                        </div>
+                                                        <div className="card-body">
+                                                            <p className="card-text">{el.post.description}</p>
+                                                            <Link className="btn btn-secondary post-details" to={`/profile-page/${key}`} >Post details</Link>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        )
+                                    }
+                                )
+
+                            }
+                        </div>
+                    </div>
+                ) */}
 
 
             </>

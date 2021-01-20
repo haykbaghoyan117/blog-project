@@ -14,7 +14,7 @@ class FormPost extends Component {
 
     render() {
         return (
-            this.props.posts === null ?
+            this.props?.posts === null ?
                 (
                     <Spinner />
                 )
