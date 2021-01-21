@@ -14,12 +14,10 @@ class ProfilePage extends Component {
             display: 'none',
             rndNumber: 0,
             id: '',
-            i: 3,
-            treePosts = {}
+            rndId: []
         }
 
         async componentDidMount() {
-
             
             if(this.props.posts) {
                 this.setState({ rndNumber: Object.keys(this.props.posts).length })
@@ -29,7 +27,7 @@ class ProfilePage extends Component {
                 this.setState({ display: 'block'})
             }
             if(this.props.match.params.id) {
-                this.setState({ id: this.props.match.params.id, i: 4 });
+                this.setState({ id: this.props.match.params.id });
                 await db.ref().orderByKey().equalTo(`${this.props.match.params.id}`).on('value', snap => {
                     if(snap.val()) {
                         this.setState({ post:snap.val()[this.props.match.params.id], emptyPost: false });
@@ -38,10 +36,25 @@ class ProfilePage extends Component {
                         this.setState({emptyPost: true})
                     }
                 })
-
             }
         }
         
+        treeRandId = (id) => {
+            const lengthOfPosts = Object.keys(this.props.posts).length;
+            const arr = [];
+            if( this.state.id !== '' ) {
+                arr.push(this.state.id * 1)
+            }
+            arr.indexOf(2)
+            if( lengthOfPosts < 3 )
+            for( let i = 0; i < 3; i++ ) {
+                const randomIndex = Math.floor(Math.random() * numberOfPosts);
+                const idx = Object.getOwnPropertyNames(this.props.posts)[ randomIndex ];
+                if( idx * 1 === this.props.match?.params.id * 1 ) {
+                    return --i;
+                }
+            }
+        }
     
         deletePost = (id) => async () => {
             await db.ref().child(id).remove();
@@ -62,16 +75,6 @@ class ProfilePage extends Component {
         }
 
     render() {
-        const obj = new Object();
-        const numberOfPosts = Object.keys(this.props.posts).length;
-        for( const i of numberOfPosts ) {
-            const randomIndex = Math.floor(Math.random() * numberOfPosts);
-            const idx = Object.getOwnPropertyNames(this.props.posts)[ randomIndex ];
-            let k = 0;
-            if( idx !== this.props.match.params.id ) {
-                obj.idx = this.props.posts.posts[idx]
-            }
-        }
         return(
             <>
             {this.state.emptyPost &&  <h1>Has not selection post</h1>}
@@ -129,44 +132,7 @@ class ProfilePage extends Component {
 
 
                 {/* <FormPost posts={this.props.randPosts} /> */}
-{/* 
-                (
-                    <Spinner />
-                )
-                :
-                (
-                    <div className='container-fluid'>
-                        <div className='row'>
-                            {
-                                Object.entries(this.props.posts).map(
-                                    ([key, el]) => {
-                                        this.props.setSelectionPost(key);
-                                        return (
-                                            <div className='col-md-4 all-posts'>
-                                                <div className="card-columns form-style">
-                                                    <div className="card all-form">
-                                                        <div>
-                                                            <h4>{el.post.title}</h4>
-                                                        </div>
-                                                        <div className='super-ramka'>
-                                                            <div className="lent"/>
-                                                            <img className="card-img-top form-img" src={el.post.fileUrl} alt="Card image" />
-                                                        </div>
-                                                        <div className="card-body">
-                                                            <p className="card-text">{el.post.description}</p>
-                                                            <Link className="btn btn-secondary post-details" to={`/profile-page/${key}`} >Post details</Link>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        )
-                                    }
-                                )
 
-                            }
-                        </div>
-                    </div>
-                ) */}
 
 
             </>
