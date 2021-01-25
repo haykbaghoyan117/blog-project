@@ -13,6 +13,7 @@ class FormPost extends Component {
     }
 
     render() {
+        console.log("FOR", this.props)
         return (
             this.props?.posts === null ?
                 (
@@ -23,9 +24,10 @@ class FormPost extends Component {
                     <div className='container-fluid'>
                         <div className='row'>
                             {
-                                Object.entries(this.props.posts).map(
+                                
+                                this.props.posts &&  Object.entries(this.props.posts).map(
                                     ([key, el]) => {
-                                        this.props.setSelectionPost(key);
+                                        // this.props.setSelectionPost(key);
                                         return (
                                             <div className='col-md-4 all-posts'>
                                                 <div className="card-columns form-style">
@@ -34,7 +36,7 @@ class FormPost extends Component {
                                                             <h4>{el.post.title}</h4>
                                                         </div>
                                                         <div className='super-ramka'>
-                                                            <div className="lent"/>
+                                                            <div className="lent" />
                                                             <img className="card-img-top form-img" src={el.post.fileUrl} alt="Card image" />
                                                         </div>
                                                         <div className="card-body">
@@ -57,7 +59,8 @@ class FormPost extends Component {
 }
 
 
-const mapStateToProps = ({ post }) => {
+const mapStateToProps = ({ post, posts }) => {
+    console.log("mapState", posts)
     return { post }
 }
 
