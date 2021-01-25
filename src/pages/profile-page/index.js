@@ -14,7 +14,9 @@ class ProfilePage extends Component {
             display: 'none',
             rndNumber: 0,
             id: '',
-            rndId: []
+            rndId: [],
+            allPosts: {},
+            treeObj: {}
         }
 
         async componentDidMount() {
@@ -38,22 +40,36 @@ class ProfilePage extends Component {
                 })
             }
         }
+
+        filterPosts = (id) => {
+            Object.keys(this.props.posts).map(key => {
+                if(key * 1 !== id * 1) {
+                    return this.setState({ allPosts: {id: this.props.posts[id]} })
+                }
+            })
+        }
+
+        randFunc = (k, numberOfPosts) => {
+            for( let i = 0; i < k; i++ ) {
+                const randomIndex = Math.floor(Math.random() * numberOfPosts);
+                const idx = Object.getOwnPropertyNames(this.props.posts)[ randomIndex ] * 1;
+                if( this.state.rndId.includes(idx) ) {
+                    return --i;
+                }else {
+                    this.state.treeObj.idx = this.props.posts.idx
+                }
+            }
+        }
         
         treeRandId = (id) => {
             const lengthOfPosts = Object.keys(this.props.posts).length;
-            const arr = [];
-            if( this.state.id !== '' ) {
-                arr.push(this.state.id * 1)
-            }
-            arr.indexOf(2)
-            if( lengthOfPosts < 3 )
-            for( let i = 0; i < 3; i++ ) {
-                const randomIndex = Math.floor(Math.random() * numberOfPosts);
-                const idx = Object.getOwnPropertyNames(this.props.posts)[ randomIndex ];
-                if( idx * 1 === this.props.match?.params.id * 1 ) {
-                    return --i;
+            if( id !== '' ) {
+                if( lengthOfPosts > 3 ){
+                    return this.randFunc(3, lengthOfPosts);
                 }
             }
+            if( lengthOfPosts < 3 ){}
+
         }
     
         deletePost = (id) => async () => {
