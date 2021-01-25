@@ -12,31 +12,70 @@ class ProfilePage extends Component {
             post: null,
             emptyPost: false,
             display: 'none',
-            rndNumber: 0,
+            postsLength: 0,
             id: '',
-            rndId: []
+            allPostsId: [],
+            treePosts: {}
         }
 
         async componentDidMount() {
             
             if(this.props.posts) {
-                this.setState({ rndNumber: Object.keys(this.props.posts).length })
+                this.setState({ postsLength: Object.keys(this.props.posts.posts).length })
             }
             
             if(this.props.user?.user?.email === 'admin@gmail.com') {
                 this.setState({ display: 'block'})
             }
             if(this.props.match.params.id) {
-                this.setState({ id: this.props.match.params.id });
+                this.filterPosts(this.props.match.params.id);
                 await db.ref().orderByKey().equalTo(`${this.props.match.params.id}`).on('value', snap => {
                     if(snap.val()) {
                         this.setState({ post:snap.val()[this.props.match.params.id], emptyPost: false });
 
-                    }else{
+                    }else {
                         this.setState({emptyPost: true})
                     }
                 })
+            }else {
+                this.filterPosts(1);
             }
+
+            this.allPosts();
+        }
+
+        filterPosts = (id) => {
+            const arr1 = [];
+            Object.keys(this.props.posts.posts).map(key => {
+                if(+key !== +id) {
+                    arr1.push(+id)
+                }
+            })
+            this.setState({ allPostsId: arr1 })
+        }
+
+        allPosts = () => {
+            const obj = {};
+            let arr = [];
+            const array = this.state.allPostsId;
+            if(array.length > 3) {
+                for(let i = 0; i < 3; i++) {
+                    const rnd = Math.floor(Math.random() * array.length);
+                    if( arr.includes(array[rnd]) ) {
+                        return --i;
+                    }else {
+                        arr.push(array[rnd])
+                    }
+                }console.log('+++++++', arr)
+            }else {
+                return arr = array;
+            }
+
+            arr.map(id => {
+                obj[id] = this.props.posts.posts[id]
+            })
+
+            this.setState({ treePosts: obj })
         }
         
         treeRandId = (id) => {
@@ -48,7 +87,7 @@ class ProfilePage extends Component {
             arr.indexOf(2)
             if( lengthOfPosts < 3 )
             for( let i = 0; i < 3; i++ ) {
-                const randomIndex = Math.floor(Math.random() * numberOfPosts);
+                const randomIndex = Math.floor(Math.random() * lengthOfPosts);
                 const idx = Object.getOwnPropertyNames(this.props.posts)[ randomIndex ];
                 if( idx * 1 === this.props.match?.params.id * 1 ) {
                     return --i;
@@ -75,6 +114,7 @@ class ProfilePage extends Component {
         }
 
     render() {
+        console.log('*********', this.state)
         return(
             <>
             {this.state.emptyPost &&  <h1>Has not selection post</h1>}
@@ -131,7 +171,7 @@ class ProfilePage extends Component {
 
 
 
-                {/* <FormPost posts={this.props.randPosts} /> */}
+                <FormPost posts={this.state.treePosts} />
 
 
 
