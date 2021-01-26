@@ -12,15 +12,12 @@ class ProfilePage extends Component {
         post: null,
         emptyPost: false,
         display: 'none',
-        postsLength: 0,
         id: '',
         allPostsId: [],
-        treePosts: {},
-        randomList: []
+        treePosts: {}
     }
 
     async componentDidMount() {
-
         if (this.props.user?.user?.email === 'admin@gmail.com') {
             this.setState({ display: 'block' })
         }
@@ -28,17 +25,14 @@ class ProfilePage extends Component {
             await db.ref().orderByKey().equalTo(`${this.props.match.params.id}`).on('value', snap => {
                 if (snap.val()) {
                     this.setState({ post: snap.val()[this.props.match.params.id], emptyPost: false });
-
                 } else {
                     this.setState({ emptyPost: true })
                 }
             })
         }
-        this.setState({randomList: this.getRandomPostLists()})
-
-
-
     }
+    
+    
     getRandomPost = (list) => {
         const { posts } = this.props.posts;
         const detailsId = this.props.match.params.id;
@@ -70,6 +64,13 @@ class ProfilePage extends Component {
         }
         return [...ids]
     }
+    generatePostObj = (list) => {
+       const obj = {};
+       list.forEach(el => {
+        obj[el] = this.props.posts.posts[el]
+       });
+       return obj;
+    }
     deletePost = (id) => async () => {
         await db.ref().child(id).remove();
         this.setState({ post: null })
@@ -85,26 +86,18 @@ class ProfilePage extends Component {
         });
         this.setState({ comment: '' })
     }
-    generatePostObj = (list) => {
-       const obj = {};
-       list.forEach(el => {
-        obj[el] = this.props.posts.posts[el]
-       });
-       return obj;
-    }
     render() {
-        const { randomList } = this.state;
+        const onePost = this.props.posts?.posts[ this.props.match.params.id ];
         return (
             <>
                 {this.state.emptyPost && <h1>Has not selection post</h1>}
                 {
-
-                    this.state.post?.post &&
+                    onePost &&
                     (
                         <div>
-                            <h1>{this.state.post.post.title}</h1>
-                            <img alt='alt' src={this.state.post.post.fileUrl} />
-                            <p>{this.state.post.post.description}</p>
+                            <h1>{onePost.post.title}</h1>
+                            <img alt='alt' src={onePost.post.fileUrl} />
+                            <p>{onePost.post.description}</p>
                             <input
                                 className='btn btn-danger'
                                 type='button'
@@ -117,7 +110,7 @@ class ProfilePage extends Component {
 
                 }
 
-                {this.state.post?.comments !== undefined && Object.values(this.state.post.comments).map(com => {
+                {onePost?.comments !== undefined && Object.values(onePost.comments).map(com => {
                     return (
                         <ul>
                             <li>{com.displayName}</li>
@@ -144,16 +137,7 @@ class ProfilePage extends Component {
 
                     )
                 }
-
-
-
-
-           
-
-          <FormPost  posts={this.generatePostObj(randomList)}/> 
-
-
-
+          <FormPost  allPosts={this.generatePostObj(this.getRandomPostLists())}/> 
             </>
         )
     }

@@ -6,16 +6,10 @@ import { connect } from "react-redux";
 import "./style.css";
 
 class FormPost extends Component {
-
-    onChangePost = (id) => () => {
-        const { setPost } = this.props;
-        setPost(id);
-    }
-
     render() {
-        console.log("FOR", this.props)
+        const { setSelectionPost } = this.props;
         return (
-            this.props?.posts === null ?
+            this.props?.allPosts === null ?
                 (
                     <Spinner />
                 )
@@ -25,9 +19,8 @@ class FormPost extends Component {
                         <div className='row'>
                             {
                                 
-                                this.props.posts &&  Object.entries(this.props.posts).map(
+                                this.props.allPosts &&  Object.entries(this.props.allPosts).map(
                                     ([key, el]) => {
-                                        // this.props.setSelectionPost(key);
                                         return (
                                             <div className='col-md-4 all-posts'>
                                                 <div className="card-columns form-style">
@@ -41,7 +34,12 @@ class FormPost extends Component {
                                                         </div>
                                                         <div className="card-body">
                                                             <p className="card-text">{el.post.description}</p>
-                                                            <Link className="btn btn-secondary post-details" to={`/profile-page/${key}`} >Post details</Link>
+                                                            <Link
+                                                                className="btn btn-secondary post-details"
+                                                                to={`/profile-page/${key}`}
+                                                            >
+                                                                Post details
+                                                            </Link>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -60,8 +58,7 @@ class FormPost extends Component {
 
 
 const mapStateToProps = ({ post, posts }) => {
-    console.log("mapState", posts)
-    return { post }
+    return { post, posts }
 }
 
 const mapDispatchToProps = {

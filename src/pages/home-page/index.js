@@ -8,29 +8,47 @@ import AdminAddForm from '../../components/admin-add-form';
 
 class HomePage extends Component {
 
-    componentDidMount() {
-        this.props.setPost(null);
-        this.sendPostsData();
+    state = {
+        object: {}
     }
 
-    componentDidUpdate(prevProps, prevState) {
-        if(this.props.post.post !== null) {
-            this.props.history.push('profile-page');
-            const { post } = this.props.post;
-            const { selectionPost } = this.props;
-            db.ref().orderByKey().equalTo(`${post}`).on('value', snap => this.setState(setSelectionPost(snap.val())));
-        }
+    async componentDidMount() {
+        const { setPost } = this.props;
+        setPost(null);
+        await this.sendPostsData();
+        await this.setState({ object: this.props.posts?.posts})
     }
-    
-
+    // componentDidUpdate(prevProps, prevState) {
+    //     if(this.props.post.post !== null) {
+    //         this.props.history.push('profile-page');
+    //         const { post } = this.props.post;
+    //         const { setSelectionPost } = this.props;
+    //         db.ref().orderByKey().equalTo(`${post}`).on('value', snap => setSelectionPost(snap.val()) );
+    //     }
+    // }
     sendPostsData = async () => {
         const { setPosts } = this.props;
         await db.ref().on('value', snap => setPosts(snap.val()));
     }
-
+    handleChange = (e) => {
+        e.preventDefault();
+        const { setPosts } = this.props;
+        const obj = {};
+        console.log('------>', Object.values(this.props.posts.posts));
+        const text = e.target.value;
+        if( text !== '' && this.props.posts ) {
+            const arr = Object.keys(this.props.posts.posts);
+            arr.forEach(key => {
+                if( ( this.props.posts.posts[key].post.title.toUpperCase() ).indexOf(text.toUpperCase() ) > -1 ) {
+                    obj[key] = this.props.posts.posts[key];
+                }
+            })
+            this.setState({ object: obj})
+        }else return this.setState({ object: this.props.posts.posts })
+    }
     render() {
 
-        const { posts } = this.props.posts;
+        const { object } = this.state;
         const { user } = this.props.user;
         return (
             <>
@@ -40,7 +58,8 @@ class HomePage extends Component {
                             <>
                                 <AdminAddForm />
                                 <SearchCategories />
-                                <FormPost posts={posts} />
+                                <input type='text' onChange={this.handleChange} placeholder='search title' />
+                                <FormPost allPosts={object} />
 
                             </>
                         )
@@ -48,7 +67,8 @@ class HomePage extends Component {
                         (
                             <>
                                 <SearchCategories />
-                                <FormPost posts={posts} />
+                                <input type='text' onChange={this.handleChange} placeholder='search title' />
+                                <FormPost allPosts={object} />
                             </>
                         )
                 }
