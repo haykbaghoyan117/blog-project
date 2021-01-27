@@ -31,8 +31,6 @@ class ProfilePage extends Component {
             })
         }
     }
-    
-    
     getRandomPost = (list) => {
         const { posts } = this.props.posts;
         const detailsId = this.props.match.params.id;
@@ -75,16 +73,17 @@ class ProfilePage extends Component {
         await db.ref().child(id).remove();
         this.setState({ post: null })
     }
-    handleChange = ({ target: { value } }) => {
-        this.setState({ comment: value })
+    handleChange = (e) => {
+        e.preventDefault();
+        this.setState({ comment: e.target.value })
     }
     addComment = (id) => async (e) => {
         e.preventDefault();
         await db.ref().child(id).child('comments').push({
             'displayName': this.props.user?.user?.displayName,
-            'comment': this.state.comment
+            'comment': e.target[0].value
         });
-        this.setState({ comment: '' })
+        e.target[0].value = ''
     }
     render() {
         const onePost = this.props.posts?.posts[ this.props.match.params.id ];
@@ -125,8 +124,8 @@ class ProfilePage extends Component {
                             <input
                                 type='text'
                                 placeholder='Add comment'
-                                value={this.state.comment}
-                                onChange={this.handleChange}
+                                // value={this.state.comment}
+                                // onChange={this.handleChange}
                             />
                             <input
                                 className='btn btn-primary'

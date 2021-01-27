@@ -9,7 +9,7 @@ import AdminAddForm from '../../components/admin-add-form';
 class HomePage extends Component {
 
     state = {
-        object: {}
+        text: ''
     }
 
     async componentDidMount() {
@@ -32,23 +32,22 @@ class HomePage extends Component {
     }
     handleChange = (e) => {
         e.preventDefault();
-        const { setPosts } = this.props;
+        this.setState({ text: e.target.value });
+    }
+    filterObjects = () => {
         const obj = {};
-        console.log('------>', Object.values(this.props.posts.posts));
-        const text = e.target.value;
-        if( text !== '' && this.props.posts ) {
+        const { text } = this.state;
+        if( text !== '' && this.props.posts.posts ) {
             const arr = Object.keys(this.props.posts.posts);
             arr.forEach(key => {
                 if( ( this.props.posts.posts[key].post.title.toUpperCase() ).indexOf(text.toUpperCase() ) > -1 ) {
                     obj[key] = this.props.posts.posts[key];
                 }
             })
-            this.setState({ object: obj})
-        }else return this.setState({ object: this.props.posts.posts })
+            return obj;
+        }else return this.props.posts.posts;
     }
     render() {
-
-        const { object } = this.state;
         const { user } = this.props.user;
         return (
             <>
@@ -59,7 +58,7 @@ class HomePage extends Component {
                                 <AdminAddForm />
                                 <SearchCategories />
                                 <input type='text' onChange={this.handleChange} placeholder='search title' />
-                                <FormPost allPosts={object} />
+                                <FormPost allPosts={this.filterObjects()} />
 
                             </>
                         )
@@ -68,7 +67,7 @@ class HomePage extends Component {
                             <>
                                 <SearchCategories />
                                 <input type='text' onChange={this.handleChange} placeholder='search title' />
-                                <FormPost allPosts={object} />
+                                <FormPost allPosts={this.filterObjects()} />
                             </>
                         )
                 }
