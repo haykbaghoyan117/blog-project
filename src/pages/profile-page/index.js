@@ -14,10 +14,17 @@ class ProfilePage extends Component {
         display: 'none',
         id: '',
         allPostsId: [],
-        treePosts: {}
+        treePosts: {},
+        randomList: null
     }
 
     async componentDidMount() {
+        console.log("vvv")
+        const { setPosts } = this.props;
+        await db.ref().on('value', snap => setPosts(snap.val()));
+    this.setState({randomList:this.getRandomPostLists() })
+
+        await this.setState({ object: this.props.posts?.posts})
         if (this.props.user?.user?.email === 'admin@gmail.com') {
             this.setState({ display: 'block' })
         }
@@ -86,6 +93,7 @@ class ProfilePage extends Component {
         e.target[0].value = ''
     }
     render() {
+        if(!this.props.posts.posts) return null
         const onePost = this.props.posts?.posts[ this.props.match.params.id ];
         return (
             <>
@@ -136,7 +144,7 @@ class ProfilePage extends Component {
 
                     )
                 }
-          <FormPost  allPosts={this.generatePostObj(this.getRandomPostLists())}/> 
+        {this.state.randomList &&  <FormPost  allPosts={this.generatePostObj(this.state.randomList)}/> }
             </>
         )
     }

@@ -18,14 +18,14 @@ class HomePage extends Component {
         await this.sendPostsData();
         await this.setState({ object: this.props.posts?.posts})
     }
-    // componentDidUpdate(prevProps, prevState) {
-    //     if(this.props.post.post !== null) {
-    //         this.props.history.push('profile-page');
-    //         const { post } = this.props.post;
-    //         const { setSelectionPost } = this.props;
-    //         db.ref().orderByKey().equalTo(`${post}`).on('value', snap => setSelectionPost(snap.val()) );
-    //     }
-    // }
+    componentDidUpdate(prevProps, prevState) {
+        if(this.props.post.post !== null) {
+            this.props.history.push('profile-page');
+            const { post } = this.props.post;
+            const { setSelectionPost } = this.props;
+            db.ref().orderByKey().equalTo(`${post}`).on('value', snap => setSelectionPost(snap.val()) );
+        }
+    }
     sendPostsData = async () => {
         const { setPosts } = this.props;
         await db.ref().on('value', snap => setPosts(snap.val()));

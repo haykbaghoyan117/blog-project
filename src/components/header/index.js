@@ -40,10 +40,10 @@ class Header extends Component {
                         <div className="collapse navbar-collapse" id="collapsibleNavbar">
                             <ul className="navbar-nav">
                                 <li className="nav-item">
-                                    <Link className="nav-link" to='sign-in'>SignIn</Link>
+                                    <Link className="nav-link" to='/sign-in'>SignIn</Link>
                                 </li>
                                 <li className="nav-item">
-                                    <Link className="nav-link" to='sign-up'>SignUp</Link>
+                                    <Link className="nav-link" to='/sign-up'>SignUp</Link>
                                 </li>
                             </ul>
                         </div>
