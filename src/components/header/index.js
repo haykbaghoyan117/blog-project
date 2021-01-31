@@ -17,21 +17,14 @@ class Header extends Component {
         }
     }
 
-    componentDidUpdate(prevProps, prevState) {
-        
-        console.log('xxxxxxxxxxx', this.props)
-    }
-    
-    
-    
     render() {
         const { user } = this.props.user;
         return (
-            <>
+            <header>
                 {
                     !user?
                     (
-                        <nav className="navbar navbar-expand-md bg-dark navbar-dark">
+                        <nav className="navbar navbar-expand-md navbar-dark">
 
                         <Link className="navbar-brand" to='/'>Blog</Link>
                         <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
@@ -40,10 +33,10 @@ class Header extends Component {
                         <div className="collapse navbar-collapse" id="collapsibleNavbar">
                             <ul className="navbar-nav">
                                 <li className="nav-item">
-                                    <Link className="nav-link" to='/sign-in'>SignIn</Link>
+                                    <Link className="nav-link link-1" to='/sign-in'>SignIn</Link>
                                 </li>
-                                <li className="nav-item">
-                                    <Link className="nav-link" to='/sign-up'>SignUp</Link>
+                                <li className="nav-item link-1">
+                                    <Link className="nav-link link-1" to='/sign-up'>SignUp</Link>
                                 </li>
                             </ul>
                         </div>
@@ -51,7 +44,7 @@ class Header extends Component {
                     )
                     :
                     (
-                    <nav className="navbar navbar-expand-md bg-dark navbar-dark">
+                    <nav className="navbar navbar-expand-md navbar-dark">
 
                         <Link
                             className="navbar-brand"
@@ -64,10 +57,10 @@ class Header extends Component {
                         <div className="collapse navbar-collapse" id="collapsibleNavbar">
                             <ul className="navbar-nav">
                                 <li className="nav-item">
-                                    <Link className="nav-link" to={`/profile-page/${this.props.selectionPost.selectionPost}`}>Profile({user.displayName})</Link>
+                                    <Link className="nav-link link-1" to={`/profile-page/${this.props.selectionPost.selectionPost}`}>Profile({user.displayName})</Link>
                                 </li>
                                 <li className="nav-item">
-                                    <Link className="nav-link" to='/' onClick={signOut}>SignOut</Link>
+                                    <Link className="nav-link link-1" to='/' onClick={signOut}>SignOut</Link>
                                 </li>
                             </ul>
                         </div>
@@ -80,7 +73,7 @@ class Header extends Component {
                 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
                 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
-            </>
+            </header>
         )
     }
 }

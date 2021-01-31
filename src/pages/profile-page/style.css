@@ -1,0 +1,13 @@
+li {
+    list-style-type: none;
+}
+
+.display-name {
+    font-weight: bold;
+    font-size: 20px;
+    color: darkorange;
+}
+
+.user-comment {
+    margin-left: 20px;
+}

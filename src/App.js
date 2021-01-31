@@ -37,9 +37,9 @@ class App extends Component {
     }
 }
 
-const mapStateToProps = (state) => ({
-
-})
+const mapStateToProps = (state) => {
+    return state
+}
 
 const mapDispatchToProps = {
     setUser

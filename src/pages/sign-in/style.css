@@ -1,6 +1,5 @@
 .sign-in {
     background-color: #838996;
-    background-image: url(../../images/lam.jpg);
     padding: 20px;
     margin: 0 auto;
     margin-top: 100px;
@@ -20,10 +19,8 @@
 .sign-in form button {
     border-radius: 10px;
     background-color: #343A40;
-    background-image: url(../../images/body_bg_new.jpg);
 }
 
 .sign-in form button:hover {
     background-color: #343A40;
-    background-image: url(../../images/lam.jpg);
 }

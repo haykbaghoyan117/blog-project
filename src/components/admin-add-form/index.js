@@ -96,7 +96,7 @@ class AdminAddForm extends Component {
                                 <div className='admin-button'>
                                     <div className="dropdown">
                                         <input
-                                            className="btn btn-secondary dropdown-toggle"
+                                            className="btn btn-light dropdown-toggle"
                                             type="button"
                                             id="dropdownMenu2"
                                             data-toggle="dropdown"
@@ -113,7 +113,7 @@ class AdminAddForm extends Component {
                                             <input className="dropdown-item" type="button" value='Happy' onClick={this.createCategories} />
                                         </div>
                                     </div>
-                                    <button type="submit" className="btn btn-secondary admin-right-button">Add post</button>
+                                    <button type="submit" className="btn btn-light admin-right-button">Add post</button>
                                 </div>
                             </form>
                         </>

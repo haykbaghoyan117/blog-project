@@ -1,0 +1,11 @@
+.search-input {
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
+}
+
+.home-search {
+    display: flex;
+    justify-content: space-between;
+    /* margin-left: 10%; */
+}

@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { setPosts, randPosts, setSelectionPost } from "../../store/actions";
 import Spinner from '../../components/spinner';
 import FormPost from '../../components/form-post';
+import './style.css';
 
 
 class ProfilePage extends Component {
@@ -19,12 +20,12 @@ class ProfilePage extends Component {
     }
 
     async componentDidMount() {
-        console.log("vvv")
         const { setPosts } = this.props;
-        await db.ref().on('value', snap => setPosts(snap.val()));
-    this.setState({randomList:this.getRandomPostLists() })
+        await db.ref().on('value', snap => {
+            setPosts(snap.val());
+            this.setState({ randomList: this.getRandomPostLists() });
+        });
 
-        await this.setState({ object: this.props.posts?.posts})
         if (this.props.user?.user?.email === 'admin@gmail.com') {
             this.setState({ display: 'block' })
         }
@@ -51,14 +52,16 @@ class ProfilePage extends Component {
         return keysArray[randomIndex];
     }
     limit = () => {
-        if (this.props.match.params.id) {
-            if (Object.keys(this.props.posts.posts).length > 3) {
-                return 3;
-            } else return Object.keys(this.props.posts.posts).length - 1;
-        } else {
-            if (Object.keys(this.props.posts.posts).length > 3) {
-                return 3;
-            } else return Object.keys(this.props.posts.posts).length;
+        if (this.props.posts.posts) {
+            if (this.props.match.params.id) {
+                if (Object.keys(this.props.posts.posts).length > 3) {
+                    return 3;
+                } else return Object.keys(this.props.posts.posts).length - 1;
+            } else {
+                if (Object.keys(this.props.posts.posts).length > 3) {
+                    return 3;
+                } else return Object.keys(this.props.posts.posts).length;
+            }
         }
     }
     getRandomPostLists = () => {
@@ -70,11 +73,11 @@ class ProfilePage extends Component {
         return [...ids]
     }
     generatePostObj = (list) => {
-       const obj = {};
-       list.forEach(el => {
-        obj[el] = this.props.posts.posts[el]
-       });
-       return obj;
+        const obj = {};
+        list.forEach(el => {
+            obj[el] = this.props.posts.posts[el]
+        });
+        return obj;
     }
     deletePost = (id) => async () => {
         await db.ref().child(id).remove();
@@ -86,6 +89,9 @@ class ProfilePage extends Component {
     }
     addComment = (id) => async (e) => {
         e.preventDefault();
+        if(!this.props.user.user) {
+            return this.props.history.push('/sign-in')
+        }
         await db.ref().child(id).child('comments').push({
             'displayName': this.props.user?.user?.displayName,
             'comment': e.target[0].value
@@ -93,17 +99,20 @@ class ProfilePage extends Component {
         e.target[0].value = ''
     }
     render() {
-        if(!this.props.posts.posts) return null
-        const onePost = this.props.posts?.posts[ this.props.match.params.id ];
+
+        if (!this.props.posts.posts) return null
+        console.log(this.state.randomList)
+
+        const onePost = this.props.posts?.posts[this.props.match.params.id];
         return (
-            <>
+            <div className='container ' >
                 {this.state.emptyPost && <h1>Has not selection post</h1>}
                 {
                     onePost &&
                     (
                         <div>
                             <h1>{onePost.post.title}</h1>
-                            <img alt='alt' src={onePost.post.fileUrl} />
+                            <img alt='alt' src={onePost.post.fileUrl} width='100%' />
                             <p>{onePost.post.description}</p>
                             <input
                                 className='btn btn-danger'
@@ -120,8 +129,8 @@ class ProfilePage extends Component {
                 {onePost?.comments !== undefined && Object.values(onePost.comments).map(com => {
                     return (
                         <ul>
-                            <li>{com.displayName}</li>
-                            <li>{com.comment}</li>
+                            <li className='display-name'>{com.displayName}</li>
+                            <li className='user-comment'>{com.comment}</li>
                         </ul>
                     )
                 })
@@ -132,8 +141,8 @@ class ProfilePage extends Component {
                             <input
                                 type='text'
                                 placeholder='Add comment'
-                                // value={this.state.comment}
-                                // onChange={this.handleChange}
+                            // value={this.state.comment}
+                            // onChange={this.handleChange}
                             />
                             <input
                                 className='btn btn-primary'
@@ -144,8 +153,8 @@ class ProfilePage extends Component {
 
                     )
                 }
-        {this.state.randomList &&  <FormPost  allPosts={this.generatePostObj(this.state.randomList)}/> }
-            </>
+                { this.state.randomList && <FormPost allPosts={this.generatePostObj(this.state.randomList)} />}
+            </div>
         )
     }
 }

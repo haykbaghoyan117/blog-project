@@ -15,7 +15,7 @@ class FormPost extends Component {
                 )
                 :
                 (
-                    <div className='container-fluid'>
+                    <div className='container mb-5 pb-5'>
                         <div className='row'>
                             {
                                 
@@ -25,22 +25,15 @@ class FormPost extends Component {
                                             <div className='col-md-4 all-posts'>
                                                 <div className="card-columns form-style">
                                                     <div className="card all-form">
-                                                        <div>
-                                                            <h4>{el.post.title}</h4>
-                                                        </div>
-                                                        <div className='super-ramka'>
-                                                            <div className="lent" />
                                                             <img className="card-img-top form-img" src={el.post.fileUrl} alt="Card image" />
-                                                        </div>
-                                                        <div className="card-body">
-                                                            <p className="card-text">{el.post.description}</p>
+                                                            <h4 className='form-title'>{el.post.title}</h4>
+                                                            <p className="card-text">{el.post.description.substring(0, 25)}...</p>
                                                             <Link
-                                                                className="btn btn-secondary post-details"
+                                                                className="btn btn-danger post-details"
                                                                 to={`/profile-page/${key}`}
                                                             >
                                                                 Post details
                                                             </Link>
-                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>

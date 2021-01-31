@@ -7,7 +7,7 @@ import './style.css';
 class SearchCategories extends Component {
 
     state = {
-        categories: ''
+        categories: 'All'
     }
 
     filterCategories = async ({ target: { value } }) => {
@@ -23,7 +23,7 @@ class SearchCategories extends Component {
             <div className='search-categories'>
                 <div className="dropdown">
                     <input
-                        className="btn btn-secondary dropdown-toggle search-button"
+                        className="btn dropdown-toggle search-button"
                         type="button"
                         id="dropdownMenu2"
                         data-toggle="dropdown"

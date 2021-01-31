@@ -5,6 +5,7 @@ import { setPosts, setPost, setSelectionPost } from '../../store/actions';
 import FormPost from '../../components/form-post';
 import SearchCategories from '../../components/search-categories';
 import AdminAddForm from '../../components/admin-add-form';
+import './style.css';
 
 class HomePage extends Component {
 
@@ -56,8 +57,10 @@ class HomePage extends Component {
                         (
                             <>
                                 <AdminAddForm />
-                                <SearchCategories />
-                                <input type='text' onChange={this.handleChange} placeholder='search title' />
+                                <div className='container home-search'>
+                                    <SearchCategories />
+                                    <input className='search-input form-control' type='text' onChange={this.handleChange} placeholder='search title' />
+                                </div>
                                 <FormPost allPosts={this.filterObjects()} />
 
                             </>
@@ -65,8 +68,10 @@ class HomePage extends Component {
                         :
                         (
                             <>
-                                <SearchCategories />
-                                <input type='text' onChange={this.handleChange} placeholder='search title' />
+                                <div className='container home-search'>
+                                    <SearchCategories />
+                                    <input className='search-input form-control' type='text' onChange={this.handleChange} placeholder='search title' />
+                                </div>
                                 <FormPost allPosts={this.filterObjects()} />
                             </>
                         )
