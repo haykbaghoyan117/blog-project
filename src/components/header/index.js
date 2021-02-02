@@ -25,68 +25,66 @@ class Header extends Component {
                 {
                     !user?
                     (
-                        <nav className="navbar navbar-expand-md navbar-dark">
+                        <nav className="navbar navbar-inline navbar-expand-sm navbar-light">
                             
                         <Link className="navbar-brand" to='/'><img src={logo} width='120px' alt='image' /></Link>
-                        <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
-                            <span className="navbar-toggler-icon"></span>
-                        </button>
                         <div className="collapse navbar-collapse" id="collapsibleNavbar">
                             <ul className="navbar-nav">
                                 <li className="nav-item">
-                                    <NavLink className="nav-link link-1" to='/'>Home</Link>
+                                    <NavLink exact className="nav-link link-1 static-link" activeStyle={{color: "tomato"}} to='/'>Home</NavLink>
                                 </li>
                                 <li className="nav-item">
-                                    <NavLink className="nav-link link-1" to='/'>Shop</Link>
+                                    <NavLink activeStyle={{color: "tomato"}} exact className="nav-link link-1 static-link" to='/shop'>Shop</NavLink>
                                 </li>
                                 <li className="nav-item">
-                                    <NavLink className="nav-link link-1" to='/'>Contact Us</Link>
+                                    <NavLink activeStyle={{color: "tomato"}} exact  className="nav-link link-1 static-link" to='/contact'>Contact Us</NavLink>
                                 </li>
                                 <li className="nav-item">
-                                    <NavLink className="nav-link link-1" to='/'>Partners</Link>
+                                    <NavLink activeStyle={{color: "tomato"}} exact  className="nav-link link-1 static-link" to='/partners'>Partners</NavLink>
                                 </li>
                                 <li className="nav-item">
-                                    <NavLink className="nav-link link-1" to='/'>About Us</Link>
+                                    <NavLink activeStyle={{color: "tomato"}} exact className="nav-link link-1 static-link" to='/about'>About Us</NavLink>
                                 </li>
                                 <li className="nav-item">
-                                    <NavLink className="nav-link link-1" to='/'>Blog</Link>
+                                    <NavLink activeStyle={{color: "tomato"}} exact className="nav-link link-1 static-link" to='/blog'>Blog</NavLink>
                                 </li>
                                 <li className="nav-item">
-                                    <NavLink className="nav-link link-1" to={`/profile-page/${this.props.selectionPost?.selectionPost}`}>Profile</Link>
-                                </li>
-                                <li className="nav-item">
-                                    <NavLink className="nav-link link-1" to='/'>SignIn</Link>
-                                </li>
-                                <li className="nav-item">
-                                    <NavLink className="nav-link link-1" to='/'>SignUp</Link>
-                                </li>
-                                <li className="nav-item">
-                                    <a className="nav-link link-1" href='#'>Shop</a>
-                                </li>
-                                <li className="nav-item">
-                                    <a className="nav-link link-1" href='#'>Contact Us</a>
-                                </li>
-                                <li className="nav-item">
-                                    <a className="nav-link link-1" href='#'>Partners</a>
-                                </li>
-                                <li className="nav-item">
-                                    <a className="nav-link link-1" href='#'>About Us</a>
-                                </li>
-                                <li className="nav-item">
-                                    <a className="nav-link link-1" href='#'>Blog</a>
-                                </li>
-                                <li className="nav-item">
-                                    <Link className="nav-link link-1" to={`/profile-page/${this.props.selectionPost?.selectionPost}`}>Profile</Link>
-                                </li>
-                                <li className="nav-item">
-                                    <Link className="nav-link link-1" to='/sign-in'>SignIn</Link>
-                                </li>
-                                <li className="nav-item link-1">
-                                    <Link className="nav-link link-1" to='/sign-up'>SignUp</Link>
+                                    <NavLink activeStyle={{color: "tomato"}}  className="nav-link link-1 static-link" to={`/profile-page`}>Profile</NavLink>
                                 </li>
                             </ul>
                         </div>
+                        <ul class="navbar-nav navbar-right">
+                                <li className="nav-item">
+                                    <NavLink activeStyle={{color: "tomato"}}  exact className="nav-link link-1 static-link" to='/search'>
+                                        <i class="fas fa-search"></i>
+                                    </NavLink>
+                                </li>
+                                <li className="nav-item">
+                                    <NavLink activeStyle={{color: "tomato"}}  exact className="nav-link link-1 static-link" to='/love'>
+                                        <i class="far fa-heart"></i>
+                                    </NavLink>
+                                </li>
+                                <li className="nav-item">
+                                    <NavLink activeStyle={{color: "tomato"}}  exact className="nav-link link-1 static-link" to='/cart'>
+                                    <i class="fas fa-shopping-cart"></i>
+                                    </NavLink>
+                                </li>
+                                <li className="nav-item">
+                                    <NavLink activeStyle={{color: "tomato"}}  exact className="nav-link link-1 static-link" to='/sign-in'>SignIn</NavLink>
+                                </li>
+                                <li className="nav-item">
+                                    <NavLink activeStyle={{color: "tomato"}} exact  className="nav-link link-1 static-link" to='/sign-up'>SignUp</NavLink>
+                                </li>
+                        </ul>
+                        <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+                            <span className="navbar-toggler-icon"></span>
+                        </button>
                     </nav>
+
+
+
+
+
                     )
                     :
                     (
@@ -103,10 +101,10 @@ class Header extends Component {
                         <div className="collapse navbar-collapse" id="collapsibleNavbar">
                             <ul className="navbar-nav">
                                 <li className="nav-item">
-                                    <Link className="nav-link link-1" to={`/profile-page/${this.props.selectionPost.selectionPost}`}>Profile({user.displayName})</Link>
+                                    <Link className="nav-link link-1 static-link" to={`/profile-page/${this.props.selectionPost.selectionPost}`}>Profile({user.displayName})</Link>
                                 </li>
                                 <li className="nav-item">
-                                    <Link className="nav-link link-1" to='/' onClick={signOut}>SignOut</Link>
+                                    <Link className="nav-link link-1 static-link" to='/' onClick={signOut}>SignOut</Link>
                                 </li>
                             </ul>
                         </div>
