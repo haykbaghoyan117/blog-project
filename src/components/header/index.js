@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { signOut } from '../../firebase';
 import { connect } from 'react-redux';
 import './style.css';
@@ -18,11 +18,6 @@ class Header extends Component {
     //     }
     // }
 
-    changeColor = (e) => {
-        e.target.className += ' text-danger';
-        console.log(e.target.className)
-    }
-
     render() {
         const { user } = this.props.user;
         return (
@@ -39,13 +34,37 @@ class Header extends Component {
                         <div className="collapse navbar-collapse" id="collapsibleNavbar">
                             <ul className="navbar-nav">
                                 <li className="nav-item">
-                                    <Link className="nav-link link-1" to='/'>Home</Link>
+                                    <NavLink className="nav-link link-1" to='/'>Home</Link>
                                 </li>
                                 <li className="nav-item">
-                                    <a className="nav-link link-1" onClick={this.changeColor} href='#'>Shop</a>
+                                    <NavLink className="nav-link link-1" to='/'>Shop</Link>
                                 </li>
                                 <li className="nav-item">
-                                    <a className="nav-link link-1" onClick={this.changeColor} href='#'>Contact Us</a>
+                                    <NavLink className="nav-link link-1" to='/'>Contact Us</Link>
+                                </li>
+                                <li className="nav-item">
+                                    <NavLink className="nav-link link-1" to='/'>Partners</Link>
+                                </li>
+                                <li className="nav-item">
+                                    <NavLink className="nav-link link-1" to='/'>About Us</Link>
+                                </li>
+                                <li className="nav-item">
+                                    <NavLink className="nav-link link-1" to='/'>Blog</Link>
+                                </li>
+                                <li className="nav-item">
+                                    <NavLink className="nav-link link-1" to={`/profile-page/${this.props.selectionPost?.selectionPost}`}>Profile</Link>
+                                </li>
+                                <li className="nav-item">
+                                    <NavLink className="nav-link link-1" to='/'>SignIn</Link>
+                                </li>
+                                <li className="nav-item">
+                                    <NavLink className="nav-link link-1" to='/'>SignUp</Link>
+                                </li>
+                                <li className="nav-item">
+                                    <a className="nav-link link-1" href='#'>Shop</a>
+                                </li>
+                                <li className="nav-item">
+                                    <a className="nav-link link-1" href='#'>Contact Us</a>
                                 </li>
                                 <li className="nav-item">
                                     <a className="nav-link link-1" href='#'>Partners</a>

@@ -56,6 +56,7 @@ class HomePage extends Component {
                     user?.email === 'admin@gmail.com' ?
                         (
                             <>
+                            
                                 <AdminAddForm />
                                 <div className='container home-search'>
                                     <SearchCategories />
