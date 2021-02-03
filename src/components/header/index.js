@@ -4,6 +4,7 @@ import { signOut } from '../../firebase';
 import { connect } from 'react-redux';
 import './style.css';
 import logo from '../../images/blogger.png';
+import flag from '../../images/flag.jpg';
 
 class Header extends Component {
 
@@ -34,19 +35,19 @@ class Header extends Component {
                                     <NavLink exact className="nav-link link-1 static-link" activeStyle={{color: "tomato"}} to='/'>Home</NavLink>
                                 </li>
                                 <li className="nav-item">
-                                    <NavLink activeStyle={{color: "tomato"}} exact className="nav-link link-1 static-link" to='/shop'>Shop</NavLink>
+                                    <NavLink activeStyle={{color: "tomato"}}  className="nav-link link-1 static-link" to='/shop'>Shop</NavLink>
                                 </li>
                                 <li className="nav-item">
-                                    <NavLink activeStyle={{color: "tomato"}} exact  className="nav-link link-1 static-link" to='/contact'>Contact Us</NavLink>
+                                    <NavLink activeStyle={{color: "tomato"}}   className="nav-link link-1 static-link" to='/contact'>Contact Us</NavLink>
                                 </li>
                                 <li className="nav-item">
-                                    <NavLink activeStyle={{color: "tomato"}} exact  className="nav-link link-1 static-link" to='/partners'>Partners</NavLink>
+                                    <NavLink activeStyle={{color: "tomato"}}   className="nav-link link-1 static-link" to='/partners'>Partners</NavLink>
                                 </li>
                                 <li className="nav-item">
-                                    <NavLink activeStyle={{color: "tomato"}} exact className="nav-link link-1 static-link" to='/about'>About Us</NavLink>
+                                    <NavLink activeStyle={{color: "tomato"}}  className="nav-link link-1 static-link" to='/about'>About Us</NavLink>
                                 </li>
                                 <li className="nav-item">
-                                    <NavLink activeStyle={{color: "tomato"}} exact className="nav-link link-1 static-link" to='/blog'>Blog</NavLink>
+                                    <NavLink activeStyle={{color: "tomato"}}  className="nav-link link-1 static-link" to='/blog'>Blog</NavLink>
                                 </li>
                                 <li className="nav-item">
                                     <NavLink activeStyle={{color: "tomato"}}  className="nav-link link-1 static-link" to={`/profile-page`}>Profile</NavLink>
@@ -55,25 +56,35 @@ class Header extends Component {
                         </div>
                         <ul class="navbar-nav navbar-right">
                                 <li className="nav-item">
-                                    <NavLink activeStyle={{color: "tomato"}}  exact className="nav-link link-1 static-link" to='/search'>
+                                    <NavLink activeStyle={{color: "tomato"}}   className="nav-link link-1 static-link" to='/search'>
                                         <i class="fas fa-search"></i>
                                     </NavLink>
                                 </li>
                                 <li className="nav-item">
-                                    <NavLink activeStyle={{color: "tomato"}}  exact className="nav-link link-1 static-link" to='/love'>
+                                    <NavLink activeStyle={{color: "tomato"}}   className="nav-link link-1 static-link" to='/love'>
                                         <i class="far fa-heart"></i>
                                     </NavLink>
                                 </li>
                                 <li className="nav-item">
-                                    <NavLink activeStyle={{color: "tomato"}}  exact className="nav-link link-1 static-link" to='/cart'>
+                                    <NavLink activeStyle={{color: "tomato"}}   className="nav-link link-1 static-link" to='/cart'>
                                     <i class="fas fa-shopping-cart"></i>
                                     </NavLink>
                                 </li>
                                 <li className="nav-item">
-                                    <NavLink activeStyle={{color: "tomato"}}  exact className="nav-link link-1 static-link" to='/sign-in'>SignIn</NavLink>
+                                    <NavLink activeStyle={{color: "tomato"}}   className="nav-link link-1 static-link" to='/user'>
+                                    <i class="far fa-user"></i>
+                                    </NavLink>
                                 </li>
                                 <li className="nav-item">
-                                    <NavLink activeStyle={{color: "tomato"}} exact  className="nav-link link-1 static-link" to='/sign-up'>SignUp</NavLink>
+                                    <NavLink activeStyle={{color: "tomato"}}   className="nav-link link-1 static-link" to='/flag'>
+                                    <img alt='image' src={flag} width='30px' />
+                                    </NavLink>
+                                </li>
+                                <li className="nav-item">
+                                    <NavLink activeStyle={{color: "tomato"}}   className="nav-link link-1 static-link" to='/sign-in'>SignIn</NavLink>
+                                </li>
+                                <li className="nav-item">
+                                    <NavLink activeStyle={{color: "tomato"}}   className="nav-link link-1 static-link" to='/sign-up'>SignUp</NavLink>
                                 </li>
                         </ul>
                         <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">

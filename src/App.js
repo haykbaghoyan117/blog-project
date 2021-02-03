@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Redirect, Route, Switch } from 'react-router-dom';
 import Footer from './components/footer';
 import Header from './components/header';
 import HomePage from './pages/home-page';
@@ -29,6 +29,7 @@ class App extends Component {
                         <Route path='/profile-page' exact component={ProfilePage} />
                         <Route path='/profile-page/:id' exact component={ProfilePage} />
                         {/* <Route path='/admin-page' exact component={AdminPage} /> */}
+                        <Redirect to='/' />
                     </Switch>
                     <Footer />
                 </Router>
