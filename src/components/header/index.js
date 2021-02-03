@@ -24,103 +24,117 @@ class Header extends Component {
         return (
             <header>
                 {
-                    !user?
-                    (
-                        <nav className="navbar navbar-inline navbar-expand-sm navbar-light">
-                            
-                        <Link className="navbar-brand" to='/'><img src={logo} width='120px' alt='image' /></Link>
-                        <div className="collapse navbar-collapse" id="collapsibleNavbar">
-                            <ul className="navbar-nav">
-                                <li className="nav-item">
-                                    <NavLink exact className="nav-link link-1 static-link" activeStyle={{color: "tomato"}} to='/'>Home</NavLink>
-                                </li>
-                                <li className="nav-item">
-                                    <NavLink activeStyle={{color: "tomato"}}  className="nav-link link-1 static-link" to='/shop'>Shop</NavLink>
-                                </li>
-                                <li className="nav-item">
-                                    <NavLink activeStyle={{color: "tomato"}}   className="nav-link link-1 static-link" to='/contact'>Contact Us</NavLink>
-                                </li>
-                                <li className="nav-item">
-                                    <NavLink activeStyle={{color: "tomato"}}   className="nav-link link-1 static-link" to='/partners'>Partners</NavLink>
-                                </li>
-                                <li className="nav-item">
-                                    <NavLink activeStyle={{color: "tomato"}}  className="nav-link link-1 static-link" to='/about'>About Us</NavLink>
-                                </li>
-                                <li className="nav-item">
-                                    <NavLink activeStyle={{color: "tomato"}}  className="nav-link link-1 static-link" to='/blog'>Blog</NavLink>
-                                </li>
-                                <li className="nav-item">
-                                    <NavLink activeStyle={{color: "tomato"}}  className="nav-link link-1 static-link" to={`/profile-page`}>Profile</NavLink>
-                                </li>
-                            </ul>
-                        </div>
-                        <ul class="navbar-nav navbar-right">
-                                <li className="nav-item">
-                                    <NavLink activeStyle={{color: "tomato"}}   className="nav-link link-1 static-link" to='/search'>
-                                        <i class="fas fa-search"></i>
-                                    </NavLink>
-                                </li>
-                                <li className="nav-item">
-                                    <NavLink activeStyle={{color: "tomato"}}   className="nav-link link-1 static-link" to='/love'>
-                                        <i class="far fa-heart"></i>
-                                    </NavLink>
-                                </li>
-                                <li className="nav-item">
-                                    <NavLink activeStyle={{color: "tomato"}}   className="nav-link link-1 static-link" to='/cart'>
-                                    <i class="fas fa-shopping-cart"></i>
-                                    </NavLink>
-                                </li>
-                                <li className="nav-item">
-                                    <NavLink activeStyle={{color: "tomato"}}   className="nav-link link-1 static-link" to='/user'>
-                                    <i class="far fa-user"></i>
-                                    </NavLink>
-                                </li>
-                                <li className="nav-item">
-                                    <NavLink activeStyle={{color: "tomato"}}   className="nav-link link-1 static-link" to='/flag'>
-                                    <img alt='image' src={flag} width='30px' />
-                                    </NavLink>
-                                </li>
-                                <li className="nav-item">
-                                    <NavLink activeStyle={{color: "tomato"}}   className="nav-link link-1 static-link" to='/sign-in'>SignIn</NavLink>
-                                </li>
-                                <li className="nav-item">
-                                    <NavLink activeStyle={{color: "tomato"}}   className="nav-link link-1 static-link" to='/sign-up'>SignUp</NavLink>
-                                </li>
-                        </ul>
-                        <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
-                            <span className="navbar-toggler-icon"></span>
-                        </button>
-                    </nav>
+                    !user ?
+                        (
+                            <nav className="navbar navbar-inline navbar-expand-sm navbar-light">
+
+                                <Link className="navbar-brand" to='/'><img src={logo} width='120px' alt='image' /></Link>
+                                <div className="collapse navbar-collapse" id="collapsibleNavbar">
+                                    <ul className="navbar-nav">
+                                        <li className="nav-item">
+                                            <NavLink exact className="nav-link link-1 static-link" activeStyle={{ color: "tomato" }} to='/'>Home</NavLink>
+                                        </li>
+                                        <li className="nav-item">
+                                            <NavLink activeStyle={{ color: "tomato" }} className="nav-link link-1 static-link" to='/shop'>Shop</NavLink>
+                                        </li>
+                                        <li className="nav-item">
+                                            <NavLink activeStyle={{ color: "tomato" }} className="nav-link link-1 static-link" to='/contact'>Contact Us</NavLink>
+                                        </li>
+                                        <li className="nav-item">
+                                            <NavLink activeStyle={{ color: "tomato" }} className="nav-link link-1 static-link" to='/partners'>Partners</NavLink>
+                                        </li>
+                                        <li className="nav-item">
+                                            <NavLink activeStyle={{ color: "tomato" }} className="nav-link link-1 static-link" to='/about'>About Us</NavLink>
+                                        </li>
+                                        <li className="nav-item">
+                                            <NavLink activeStyle={{ color: "tomato" }} className="nav-link link-1 static-link" to='/blog'>Blog</NavLink>
+                                        </li>
+                                        <li className="nav-item">
+                                            <NavLink activeStyle={{ color: "tomato" }} className="nav-link link-1 static-link" to={`/profile-page`}>Profile</NavLink>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <ul class="navbar-nav navbar-right">
+                                    <li className="nav-item">
+                                        <NavLink activeStyle={{ color: "tomato" }} className="nav-link link-1 static-link" to='/search'>
+                                            <i class="fas fa-search"></i>
+                                        </NavLink>
+                                    </li>
+                                    <li className="nav-item">
+                                        <NavLink activeStyle={{ color: "tomato" }} className="nav-link link-1 static-link" to='/love'>
+                                            <i class="far fa-heart"></i>
+                                        </NavLink>
+                                    </li>
+                                    <li className="nav-item">
+                                        <NavLink activeStyle={{ color: "tomato" }} className="nav-link link-1 static-link" to='/cart'>
+                                            <i class="fas fa-shopping-cart"></i>
+                                        </NavLink>
+                                    </li>
+                                    <li className="nav-item">
+                                        <div class="dropdown">
+                                            <button
+
+                                                id="dropdownMenu2"
+                                                data-toggle="dropdown"
+                                                aria-haspopup="true"
+                                                aria-expanded="false">
+                                                <NavLink activeStyle={{ color: "tomato" }} className="nav-link link-1 static-link" to='/user'>
+                                                    <i class="far fa-user"></i>
+                                                </NavLink>
+                                            </button>
+
+                                            <div class="dropdown-menu">
+                                                <li className="nav-item">
+                                                    <NavLink activeStyle={{ color: "tomato" }} className="nav-link link-1 static-link" to='/sign-in'>SignIn</NavLink>
+                                                </li>
+                                                <li className="nav-item">
+                                                    <NavLink activeStyle={{ color: "tomato" }} className="nav-link link-1 static-link" to='/sign-up'>SignUp</NavLink>
+                                                </li>
+                                            </div>
+                                        </div>
+                                    </li>
+
+                                    <li className="nav-item">
+                                        <NavLink activeStyle={{ color: "tomato" }} className="nav-link link-1 static-link" to='/flag'>
+                                            <img alt='image' src={flag} width='30px' />
+                                        </NavLink>
+                                    </li>
+                                  
+                                </ul>
+                                <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+                                    <span className="navbar-toggler-icon"></span>
+                                </button>
+                            </nav>
 
 
 
 
 
-                    )
-                    :
-                    (
-                    <nav className="navbar navbar-expand-md navbar-dark">
+                        )
+                        :
+                        (
+                            <nav className="navbar navbar-expand-md navbar-dark">
 
-                        <Link
-                            className="navbar-brand"
-                            to='/'>
-                            Blog  
+                                <Link
+                                    className="navbar-brand"
+                                    to='/'>
+                                    Blog
                         </Link>
-                        <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
-                            <span className="navbar-toggler-icon"></span>
-                        </button>
-                        <div className="collapse navbar-collapse" id="collapsibleNavbar">
-                            <ul className="navbar-nav">
-                                <li className="nav-item">
-                                    <Link className="nav-link link-1 static-link" to={`/profile-page/${this.props.selectionPost.selectionPost}`}>Profile({user.displayName})</Link>
-                                </li>
-                                <li className="nav-item">
-                                    <Link className="nav-link link-1 static-link" to='/' onClick={signOut}>SignOut</Link>
-                                </li>
-                            </ul>
-                        </div>
-                    </nav>
-                    )
+                                <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+                                    <span className="navbar-toggler-icon"></span>
+                                </button>
+                                <div className="collapse navbar-collapse" id="collapsibleNavbar">
+                                    <ul className="navbar-nav">
+                                        <li className="nav-item">
+                                            <Link className="nav-link link-1 static-link" to={`/profile-page/${this.props.selectionPost.selectionPost}`}>Profile({user.displayName})</Link>
+                                        </li>
+                                        <li className="nav-item">
+                                            <Link className="nav-link link-1 static-link" to='/' onClick={signOut}>SignOut</Link>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </nav>
+                        )
                 }
 
 

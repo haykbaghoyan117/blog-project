@@ -1,9 +1,6 @@
 .is-active{
     color: red;
 }
-.static-link{
-    color: black;
-}
 .active{
     background: transparent !important;
 }
