@@ -22,7 +22,9 @@ class FormPost extends Component {
                                 this.props.allPosts &&  Object.entries(this.props.allPosts).map(
                                     ([key, el]) => {
                                         return (
-                                            <div className='col-md-4 all-posts'>
+                                            <div onClick={() => {
+                                                return this.props.history?.push(`/profile-page/${key}`)
+                                            }} className='col-lg-4 col-sm-6 all-posts'>
                                                 <div className="card-columns form-style">
                                                     <div className="card all-form">
                                                             <img className="card-img-top form-img" src={el.post.fileUrl} alt="Card image" />

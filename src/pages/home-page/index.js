@@ -59,6 +59,7 @@ class HomePage extends Component {
                             
                                 <AdminAddForm />
                                 <div className='container home-search'>
+                                    <h2 className='pb-1'>Blog</h2>
                                     <SearchCategories />
                                     <input className='search-input form-control' type='text' onChange={this.handleChange} placeholder='search title' />
                                 </div>
@@ -70,6 +71,7 @@ class HomePage extends Component {
                         (
                             <>
                                 <div className='container home-search'>
+                                    <h3>Blog</h3>
                                     <SearchCategories />
                                     <input className='search-input form-control' type='text' onChange={this.handleChange} placeholder='search title' />
                                 </div>
