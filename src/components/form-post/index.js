@@ -21,6 +21,8 @@ class FormPost extends Component {
                                 
                                 this.props.allPosts &&  Object.entries(this.props.allPosts).map(
                                     ([key, el]) => {
+                                        const d = new Date(100000000000000 - key)
+                                        const date = `${d.toLocaleString("en-US", {month: "short"})} ${d.toLocaleString("en-US", {day: "numeric"})}th ${d.toLocaleString("en-US", {year: "numeric"})}`
                                         return (
                                             <div onClick={() => {
                                                 return this.props.history?.push(`/profile-page/${key}`)
@@ -28,21 +30,20 @@ class FormPost extends Component {
                                                 <div className="card-columns form-style">
                                                     <div className="card all-form">
                                                             <img className="card-img-top form-img" src={el.post.fileUrl} alt="Card image" />
-                                                            <h4 className='form-title'>{el.post.title}</h4>
-                                                            <p className="card-text">{el.post.description.substring(0, 25)}...</p>
-                                                            <Link
-                                                                className="btn btn-danger post-details"
-                                                                to={`/profile-page/${key}`}
-                                                            >
-                                                                Post details
-                                                            </Link>
+                                                            <div className='m-4'>
+                                                                <h4 className='form-title'><strong>{el.post.title}</strong></h4>
+                                                                <p className="card-text">{el.post.description.substring(0, 25)}...</p>
+                                                            </div>
+                                                                <div className='d-flex align-items-end justify-content-between ml-4 mr-4'>
+                                                                    <div>Category: {el.post.categories === '' ? 'not choose':el.post.categories}</div>
+                                                                    <div>{date}</div>
+                                                                </div>
                                                     </div>
                                                 </div>
                                             </div>
                                         )
                                     }
                                 )
-
                             }
                         </div>
                     </div>

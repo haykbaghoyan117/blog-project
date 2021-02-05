@@ -15,9 +15,6 @@
     border: none !important;
 }
 
-.all-form h4, p {
-    margin-left: 10px;
-}
 
 
 .ramka{
@@ -36,7 +33,6 @@
     display: flex;
     justify-content: center;
     position: relative;
-
     width: 100%;
     min-height: auto;
 }

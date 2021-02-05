@@ -6,6 +6,7 @@ import FormPost from '../../components/form-post';
 import SearchCategories from '../../components/search-categories';
 import AdminAddForm from '../../components/admin-add-form';
 import './style.css';
+import SearchBar from '../../components/search-bar';
 
 class HomePage extends Component {
 
@@ -71,11 +72,17 @@ class HomePage extends Component {
                         (
                             <>
                                 <div className='container home-search'>
-                                    <h3>Blog</h3>
-                                    <SearchCategories />
-                                    <input className='search-input form-control' type='text' onChange={this.handleChange} placeholder='search title' />
+                                    <div className='blog-left'>
+                                        <h3>Blog</h3>
+                                        <SearchCategories />
+                                    </div>
+                                    <div className='blog-right'>
+                                        <div className='ggg'>
+                                            <label><input className='fff' type="text" id="search-bar" onChange={this.handleChange} /><span className="search-icon"><i class="fas fa-search"></i></span></label>
+                                        </div>
+                                    </div>
                                 </div>
-                                <FormPost allPosts={this.filterObjects()} />
+                                <FormPost allPosts={this.filterObjects()} history={this.props.history} />
                             </>
                         )
                 }

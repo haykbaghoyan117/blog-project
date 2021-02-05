@@ -1,8 +1,8 @@
 .search-categories {
     display: flex;
     justify-content: center;
-    margin-top: 30px;
-    background-color: #fff;
+    margin-left: 10px;
+    background-color: #FAFAFA;
 }
 .search-button:hover {
     background-color: #fff !important;

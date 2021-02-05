@@ -153,7 +153,7 @@ class ProfilePage extends Component {
 
                     )
                 }
-                { this.state.randomList && <FormPost allPosts={this.generatePostObj(this.state.randomList)} />}
+                { this.state.randomList && <FormPost allPosts={this.generatePostObj(this.state.randomList)} history={this.props.history} />}
             </div>
         )
     }
