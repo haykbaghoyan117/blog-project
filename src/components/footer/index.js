@@ -5,21 +5,15 @@ class Footer extends Component {
     render() {
         return (
             <footer className=" text-dark text-justify text-lg-start mt-5 xxx">
-                <div className="container mt-6 p-4">
+                <div className="container mt-2">
                     <div className="row">
-                        <div className="col-lg-6 col-md-12 mb-4 mb-md-0">
-                            <h5 className="text-uppercase">Find a store</h5>
-                            
-                            <p>
-                                Lorem ipsum dolor sit amet consectetur, adipisicing elit. Iste atque ea quis
-                                molestias. Fugiat pariatur maxime quis culpa corporis vitae repudiandae aliquam
-                                voluptatem veniam, est atque cumque eum delectus sint!
-                            </p>
+                        <div className="justify-content-center col-lg-12 col-md-12 d-flex mb-4 mb-md-0">
+                            <h3><strong>Get the latest deals and more</strong></h3>
+                            <input placeholder='Enter email address' />
+                            <input type='button' className='btn btn-danger' value='Sign Up' />
                         </div>
                         <div className="col-lg-3 col-md-6 mb-4 mb-md-0">
-                        </div>
-                        <div className="col-lg-3 col-md-6 mb-4 mb-md-0">
-                            <h5 className="text-uppercase">quick links</h5>
+                            <h3 className="text-uppercase">quick links</h3>
 
                             <ul className="list-unstyled mb-0">
                                 <li>
