@@ -1,32 +1,30 @@
-// import React, { Component } from 'react';
-// import { connect } from 'react-redux';
-// import HomePage from '../home-page';
-// import AdminAddForm from '../../components/admin-add-form';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import HomePage from '../home-page';
+import AdminAddForm from '../../components/admin-add-form';
+import Footer from '../../components/footer';
 
-// class AdminPage extends Component {
+class AdminPage extends Component {
 
-//     componentDidMount() {
-//         console.log('admin page', this.props)
-//         if(this.props.user.user && this.props.user.user.email !== 'admin@gmail.com') {
-//             return this.props.history.push('/sign-in');
-//         }
-//     }
+    componentDidMount() {
+        console.log('admin page', this.props)
+        if(this.props.user.user && this.props.user.user.email !== 'admin@gmail.com') {
+            return this.props.history.push('/sign-in');
+        }
+    }
 
-//     render() {
-//         return (
-//             <>
-//                 <AdminAddForm />
-//                 <HomePage />
-//             </>
-//         )
-//     }
-// }
-// const mapStateToProps = ({ user }) => {
-//     return ({ user })
-// }
+    render() {
+        return (
+            <AdminAddForm />
+        )
+    }
+}
+const mapStateToProps = ({ user }) => {
+    return ({ user })
+}
 
-// const mapDispatchToProps = {
+const mapDispatchToProps = {
     
-// }
+}
 
-// export default connect(mapStateToProps, mapDispatchToProps)(AdminPage);
+export default connect(mapStateToProps, mapDispatchToProps)(AdminPage);

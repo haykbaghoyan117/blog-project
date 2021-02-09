@@ -7,10 +7,11 @@ import SignIn from './pages/sign-in';
 import SignUp from './pages/sign-up';
 // import ChangeProfile from './pages/change-profile';
 import ProfilePage from './pages/profile-page';
-// import AdminPage from './pages/admin-page';
 import { auth } from './firebase'
 import { connect } from 'react-redux';
 import { setUser } from "./store/actions";
+import AdminPage from './pages/admin-page';
+import './style.css';
 
 class App extends Component {
     async componentDidMount() {
@@ -20,6 +21,7 @@ class App extends Component {
         return(
             <div>
                 <Router>
+                    <div className='app'>
                     <Header />
                     <Switch>
                         <Route path='/' exact component={HomePage} />
@@ -28,10 +30,13 @@ class App extends Component {
                         {/* <Route path='/change-profile' exact component={ChangeProfile} /> */}
                         <Route path='/profile-page' exact component={ProfilePage} />
                         <Route path='/profile-page/:id' exact component={ProfilePage} />
-                        {/* <Route path='/admin-page' exact component={AdminPage} /> */}
+                        <Route path='/admin-page' exact component={AdminPage} />
                         <Redirect to='/' />
                     </Switch>
+                    </div>
+                    <div className='app-foot'>
                     <Footer />
+                    </div>
                 </Router>
             </div>
         )

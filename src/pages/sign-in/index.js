@@ -10,9 +10,6 @@ class SignIn extends Component {
         email: '',
         password: '',
         type: 'password',
-        clazz: 'fas fa-eye',
-        text: '',
-        changedText: ''
     }
 
     handleChange = ({ target: {value, id}}) => {
@@ -52,23 +49,6 @@ class SignIn extends Component {
         })
     }
 
-    xxx = (text) => {
-        let yyy = '';
-        if(text !== '') {
-            for( let i = 0; i < text.length; i++ ){
-                yyy += '*'
-            }
-        }return yyy
-    }
-
-    textChange = async (e) => {
-        e.preventDefault();
-        const { text } = this.state;
-        this.setState({
-            text: text + e.target.value[text.length],
-            changedText: this.xxx(text + e.target.value[text.length])
-        })
-    }
 
     render() {
         const { email, password } = this.state;
@@ -76,7 +56,6 @@ class SignIn extends Component {
         return (
             <div className='sign-in'>
                 <h3>Sign In</h3>
-                <input type='text' onChange={this.textChange} value={ this.state.changedText } />
                 <form onSubmit={this.handleSubmit}>
                     <div className="form-group">
                         <label htmlFor="email">Email address:</label>

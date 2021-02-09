@@ -4,7 +4,7 @@ import './style.css';
 class Footer extends Component {
     render() {
         return (
-            <footer className=" text-dark text-justify text-lg-start xxx">
+            <footer className=" text-dark text-center text-md-start xxx">
                 <div className="container-fluid">
                     <div className="row">
                         <div className="d-md-flex justify-content-center col-12 p-5 mb-md-0 footer-header">
@@ -15,23 +15,23 @@ class Footer extends Component {
                             </div>
                         </div>
                         <div className="container mt-5">
-                            <div className="row">
+                            <div className="row text-lg-left">
                                 <div className="col-lg-3 col-md-6 mb-4 mb-md-0">
-                                    <h3 className='text-md-left text-sm-center text-center'>Find a store</h3>
+                                    <h3 className='text-lg-left text-sm-center text-center'>Find a store</h3>
 
                                     <ul className="list-unstyled mb-0">
-                                        <li className='d-flex justify-content-left justify-content-sm-center justify-content-md-left'>
-                                            <div className='d-flex'>
-                                                <input placeholder='City or zip code' className='ml-md-2 search-foot' />
+                                        <li>
+                                            <div className='d-flex justify-content-lg-start justify-content-center'>
+                                                <input placeholder='City or zip code' className='search-foot' />
                                                 <button type='button' className='btn btn-danger'><i class="fas fa-search"></i></button>
                                             </div>
                                         </li>
-                                        <li>
+                                        <li className='d-flex justify-content-lg-start justify-content-center'>
                                             <p className="mt-2 search-footer-t">Enter your city or zip code to find a store near you</p>
                                         </li>
                                     </ul>
                                 </div>
-                                <div className="col-lg-3 col-md-6 mb-4 mb-md-0">
+                                <div className="col-lg-3 col-md-6 mb-4 mb-md-0 text-lg-left">
                                     <h3>Quick Links</h3>
 
                                     <ul className="list-unstyled mb-0">

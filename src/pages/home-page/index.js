@@ -50,42 +50,20 @@ class HomePage extends Component {
         }else return this.props.posts.posts;
     }
     render() {
-        const { user } = this.props.user;
         return (
             <>
-                {
-                    user?.email === 'admin@gmail.com' ?
-                        (
-                            <>
-                            
-                                <AdminAddForm />
-                                <div className='container home-search'>
-                                    <h2 className='pb-1'>Blog</h2>
-                                    <SearchCategories />
-                                    <input className='search-input form-control' type='text' onChange={this.handleChange} placeholder='search title' />
-                                </div>
-                                <FormPost allPosts={this.filterObjects()} />
-
-                            </>
-                        )
-                        :
-                        (
-                            <>
-                                <div className='container home-search'>
-                                    <div className='blog-left'>
-                                        <h3>Blog</h3>
-                                        <SearchCategories />
-                                    </div>
-                                    <div className='blog-right'>
-                                        <div className='ggg'>
-                                            <label><input className='fff' type="text" id="search-bar" onChange={this.handleChange} /><span className="search-icon"><i class="fas fa-search"></i></span></label>
-                                        </div>
-                                    </div>
-                                </div>
-                                <FormPost allPosts={this.filterObjects()} history={this.props.history} />
-                            </>
-                        )
-                }
+                <div className='container home-search'>
+                    <div className='blog-left'>
+                        <h3>Blog</h3>
+                        <SearchCategories />
+                    </div>
+                    <div className='blog-right'>
+                        <div className='ggg'>
+                            <label><input className='fff' type="text" id="search-bar" onChange={this.handleChange} /><span className="search-icon"><i class="fas fa-search"></i></span></label>
+                        </div>
+                    </div>
+                </div>
+                <FormPost allPosts={this.filterObjects()} history={this.props.history} />
             </>
         )
     }

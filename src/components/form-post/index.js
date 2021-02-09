@@ -15,7 +15,7 @@ class FormPost extends Component {
                 )
                 :
                 (
-                    <div className='container mb-5'>
+                    <div className='container'>
                         <div className='row'>
                             {
 
@@ -26,23 +26,20 @@ class FormPost extends Component {
                                         return (
                                             <div onClick={() => {
                                                 return this.props.history?.push(`/profile-page/${key}`)
-                                            }} className='col-lg-4 col-sm-6 all-posts'>
-                                                <div className="card-columns form-style">
-                                                    <div className="card">
-                                                    <img className="card-img-top form-img" src={el.post.fileUrl} alt="Card image" />
-
-                                                        <div className="all-form">
-                                                            <div className='m-4'>
-                                                                <h4 className='form-title'><strong>{el.post.title}</strong></h4>
-                                                                <p className="card-text">{el.post.description.substring(0, 25)}...</p>
+                                            }} className='col-lg-4 col-md-6 col-12 all-posts'>
+                                                    <div className="d-flex flex-column form-style">
+                                                        <img className="form-img" src={el.post.fileUrl} alt="Card image" />
+                                                        <div className="all-form p-4">
+                                                            <div className=''>
+                                                                <h4 className='form-title'><strong>{el.post.title.substring(0, 10)}...</strong></h4>
+                                                                <p className="text-justify">{el.post.description.substring(0, 100)}...</p>
                                                             </div>
-                                                            <div className='d-flex align-items-end justify-content-between ml-4 mr-4 jjj'>
-                                                                <div>Category: {el.post.categories === '' ? 'not choose' : el.post.categories}</div>
+                                                            <div className='d-flex justify-content-between'>
+                                                                <button className='btn btn-danger'>Category: {el.post.categories === '' ? 'not choose' : el.post.categories}</button>
                                                                 <div>{date}</div>
                                                             </div>
                                                         </div>
                                                     </div>
-                                                </div>
                                             </div>
                                         )
                                     }

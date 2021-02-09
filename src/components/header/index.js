@@ -76,7 +76,7 @@ class Header extends Component {
                                                 aria-haspopup="true"
                                                 aria-expanded="false">
                                                 <NavLink activeStyle={{ color: "tomato" }} className="nav-link link-1 static-link" to='/user'>
-                                                    <i class="far fa-user"></i>
+                                                    <i class="fas fa-user-times"></i>
                                                 </NavLink>
                                             </button>
 
@@ -110,27 +110,85 @@ class Header extends Component {
                         )
                         :
                         (
-                            <nav className="navbar navbar-expand-md navbar-dark">
+                        <>
+                            <nav className="navbar navbar-inline navbar-expand-lg navbar-light">
 
-                                <Link
-                                    className="navbar-brand"
-                                    to='/'>
-                                    Blog
-                                </Link>
-                                <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
-                                    <span className="navbar-toggler-icon"></span>
-                                </button>
+                                <Link className="navbar-brand" to='/'><img src={logo} width='120px' alt='image' /></Link>
                                 <div className="collapse navbar-collapse" id="collapsibleNavbar">
-                                    <ul className="navbar-nav">
+                                    <ul className="navbar-nav text-bold">
                                         <li className="nav-item">
-                                            <Link className="nav-link link-1 static-link" to={`/profile-page/${this.props.selectionPost.selectionPost}`}>Profile({user.displayName})</Link>
+                                            <NavLink exact className="nav-link link-1 static-link" activeStyle={{ color: "tomato" }} to='/'>Home</NavLink>
                                         </li>
                                         <li className="nav-item">
-                                            <Link className="nav-link link-1 static-link" to='/' onClick={signOut}>SignOut</Link>
+                                            <NavLink activeStyle={{ color: "tomato" }} className="nav-link link-1 static-link" to='/shop'>Shop</NavLink>
+                                        </li>
+                                        <li className="nav-item">
+                                            <NavLink activeStyle={{ color: "tomato" }} className="nav-link link-1 static-link" to='/contact'>Contact Us</NavLink>
+                                        </li>
+                                        <li className="nav-item">
+                                            <NavLink activeStyle={{ color: "tomato" }} className="nav-link link-1 static-link" to='/partners'>Partners</NavLink>
+                                        </li>
+                                        <li className="nav-item">
+                                            <NavLink activeStyle={{ color: "tomato" }} className="nav-link link-1 static-link .d-sm-flex" to='/about'>About Us</NavLink>
+                                        </li>
+                                        <li className="nav-item">
+                                            <NavLink activeStyle={{ color: "tomato" }} className="nav-link link-1 static-link" to={user.email === 'admin@gmail.com' ? '/admin-page' : '/blog'}>Blog</NavLink>
                                         </li>
                                     </ul>
                                 </div>
+                                <ul class="navbar-nav navbar-right .d-sm-flex flex-row">
+                                    <li className="nav-item m-2">
+                                        <NavLink activeStyle={{ color: "tomato" }} className="nav-link link-1 static-link" to='/search'>
+                                            <i class="fas fa-search"></i>
+                                        </NavLink>
+                                    </li>
+                                    <li className="nav-item m-2">
+                                        <NavLink activeStyle={{ color: "tomato" }} className="nav-link link-1 static-link" to='/love'>
+                                            <i class="far fa-heart"></i>
+                                        </NavLink>
+                                    </li>
+                                    <li className="nav-item m-2">
+                                        <NavLink activeStyle={{ color: "tomato" }} className="nav-link link-1 static-link" to='/cart'>
+                                            <i class="fas fa-shopping-cart"></i>
+                                        </NavLink>
+                                    </li>
+                                    <li className="nav-item m-2">
+                                        <div className="dropdown">
+                                            <button
+                                                className='drop'
+                                                id="dropdownMenu2"
+                                                data-toggle="dropdown"
+                                                aria-haspopup="true"
+                                                aria-expanded="false">
+                                                <NavLink activeStyle={{ color: "tomato" }} className="nav-link link-1 static-link" to='/user'>
+                                                    {
+                                                        user.email === 'admin@gmail.com'?
+                                                        (<i class="fas fa-user-tie"></i>):
+                                                        (<i class="fas fa-user"></i>)
+                                                    }
+                                                </NavLink>
+                                            </button>
+
+                                            <div class="dropdown-menu drop-1">
+                                                <li className="nav-item">
+                                                    <Link className="nav-link link-1 static-link" to='/' onClick={signOut}>SignOut</Link>
+                                                </li>
+                                            </div>
+                                        </div>
+                                    </li>
+
+                                    <li className="nav-item m-2">
+                                        <NavLink activeStyle={{ color: "tomato" }} className="nav-link link-1 static-link" to='/flag'>
+                                            <img alt='image' src={flag} width='30px' />
+                                        </NavLink>
+                                    </li>
+                                  
+                                </ul>
+                                <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+                                    <span className="navbar-toggler-icon"></span>
+                                </button>
                             </nav>
+                            </>
                         )
                 }
 

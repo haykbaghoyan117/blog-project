@@ -11,7 +11,6 @@ class AdminAddForm extends Component {
         fileUrl: null,
         id: '',
         categories: '',
-        collapse: false
     }
 
     handleChange = ({ target: { value, id } }) => {
@@ -48,16 +47,10 @@ class AdminAddForm extends Component {
             'categories': categories
         });
     }
-    handleCollapse = () => {
-        this.setState({ collapse: !this.state.collapse })
-    }
 
     render() {
         return (
             <div className='admin-add-form'>
-
-                {
-                    this.state.collapse && (
                         <>
                             <h1 className='admin-title'>Add new post</h1>
                             <form className='admin-form' action="" onSubmit={this.handleSubmit} >
@@ -117,10 +110,7 @@ class AdminAddForm extends Component {
                                 </div>
                             </form>
                         </>
-                    )
-                }
-                <button className="collapse-button" onClick={this.handleCollapse}> {this.state.collapse ? <i class="fas fa-chevron-up"></i>: <i>"Add new post"</i>}</button>
-
+                    
             </div>
         )
     }
