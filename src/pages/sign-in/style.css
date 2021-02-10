@@ -1,13 +1,13 @@
 .sign-in {
     background-color: #838996;
     padding: 20px;
+    margin-top: 100px !important;
     margin: 0 auto;
-    margin-top: 40px;
     max-width: 500px;
     width: 100%;
     border-style: solid;
     border-radius: 15px;
-    border-width: 5px;
+    border-width: 3px;
     border-color: black;
     box-shadow: 0 0 10px rgba(0, 0, 0, 5);
 }
@@ -20,20 +20,10 @@
     border-radius: 10px;
     background-color: #343A40;
 }
-
-.sign-in form button:hover {
-    background-color: #343A40;
-}
 .btn {
   border: none;
   outline: none;
   padding: 10px 16px;
   background-color: #f1f1f1;
   cursor: pointer;
-}
-
-/* Style the active class (and buttons on mouse-over) */
-.active, .btn:hover {
-  background-color: #666;
-  color: white;
 }

@@ -100,12 +100,16 @@ class ProfilePage extends Component {
     }
     render() {
 
-        if (!this.props.posts.posts) return null
-        console.log(this.state.randomList)
+        if (!this.props.posts.posts) return null;
+        const key = this.props.match.params.id;
+        const d = (100000000000000 - key);
+        console.log(d)
+        const date = `${d.toLocaleString("en-US", { month: "short" })} ${d.toLocaleString("en-US", { day: "numeric" })}th ${d.toLocaleString("en-US", { year: "numeric" })}`
+                                        
 
         const onePost = this.props.posts?.posts[this.props.match.params.id];
         return (
-            <div className='container ' >
+            <div className='container' >
                 {this.state.emptyPost && <h1>Has not selection post</h1>}
                 {
                     onePost &&
@@ -114,6 +118,8 @@ class ProfilePage extends Component {
                             <h1>{onePost.post.title}</h1>
                             <img alt='alt' src={onePost.post.fileUrl} width='100%' />
                             <p>{onePost.post.description}</p>
+                            const date = `${d.toLocaleString("en-US", { month: "short" })} ${d.toLocaleString("en-US", { day: "numeric" })}th ${d.toLocaleString("en-US", { year: "numeric" })}`
+                                        
                             <input
                                 className='btn btn-danger'
                                 type='button'
@@ -121,6 +127,7 @@ class ProfilePage extends Component {
                                 onClick={this.deletePost(this.props.match.params.id)}
                                 style={{ display: this.state.display }}
                             />
+                            <div>{date}</div>
                         </div>
                     )
 

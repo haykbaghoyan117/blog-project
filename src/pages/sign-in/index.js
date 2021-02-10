@@ -52,7 +52,6 @@ class SignIn extends Component {
 
     render() {
         const { email, password } = this.state;
-        console.log('@@@@@@@@', this.state)
         return (
             <div className='sign-in'>
                 <h3>Sign In</h3>

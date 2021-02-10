@@ -11,7 +11,6 @@ import { auth } from './firebase'
 import { connect } from 'react-redux';
 import { setUser } from "./store/actions";
 import AdminPage from './pages/admin-page';
-import './style.css';
 
 class App extends Component {
     async componentDidMount() {
@@ -21,7 +20,6 @@ class App extends Component {
         return(
             <div>
                 <Router>
-                    <div className='app'>
                     <Header />
                     <Switch>
                         <Route path='/' exact component={HomePage} />
@@ -33,10 +31,7 @@ class App extends Component {
                         <Route path='/admin-page' exact component={AdminPage} />
                         <Redirect to='/' />
                     </Switch>
-                    </div>
-                    <div className='app-foot'>
                     <Footer />
-                    </div>
                 </Router>
             </div>
         )
