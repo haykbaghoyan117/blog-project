@@ -12,6 +12,11 @@ class SignIn extends Component {
         type: 'password',
     }
 
+    componentDidMount() {
+        window.scrollTo(0, 0);
+    }
+    
+
     handleChange = ({ target: {value, id}}) => {
         this.setState({
             [id]: value

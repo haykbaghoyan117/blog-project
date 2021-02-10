@@ -6,8 +6,11 @@
 }
 .drop {
     border-width: 0px !important;
-    background: #FAFAFA
+    background: white;
 }
 .drop-1 {
     position: absolute !important;
+}
+.header-1 {
+    background-color: #fff;
 }

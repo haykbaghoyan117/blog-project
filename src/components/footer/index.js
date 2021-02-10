@@ -4,7 +4,7 @@ import './style.css';
 class Footer extends Component {
     render() {
         return (
-            <footer className=" text-dark text-center text-md-start xxx">
+            <footer className="text-dark text-center text-md-start xxx">
                 <div className="container-fluid">
                     <div className="row">
                         <div className="d-md-flex justify-content-center col-12 p-5 mb-md-0 footer-header">
@@ -85,7 +85,6 @@ class Footer extends Component {
                 <div className="text-center p-3 mt-3">
                     © {new Date().getFullYear()}
                 </div>
-                <button onClick={() => { window.scrollTo(0, 0) }}>^</button>
             </footer>
         )
     }

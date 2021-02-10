@@ -22,13 +22,13 @@ class Header extends Component {
     render() {
         const { user } = this.props.user;
         return (
-            <header>
+            <header className='header-1'>
                 {
                     !user ?
                         (
                             <nav className="navbar navbar-inline navbar-expand-lg navbar-light">
 
-                                <Link className="navbar-brand" to='/'><img src={logo} width='120px' alt='image' /></Link>
+                                <Link className="navbar-brand" to='/'><img id="logo" src={logo} width='120px' alt='image' /></Link>
                                 <div className="collapse navbar-collapse" id="collapsibleNavbar">
                                     <ul className="navbar-nav text-bold">
                                         <li className="nav-item">

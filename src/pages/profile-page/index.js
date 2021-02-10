@@ -102,23 +102,25 @@ class ProfilePage extends Component {
 
         if (!this.props.posts.posts) return null;
         const key = this.props.match.params.id;
-        const d = (100000000000000 - key);
-        console.log(d)
+        const d = new Date(100000000000000 - key);
         const date = `${d.toLocaleString("en-US", { month: "short" })} ${d.toLocaleString("en-US", { day: "numeric" })}th ${d.toLocaleString("en-US", { year: "numeric" })}`
                                         
 
         const onePost = this.props.posts?.posts[this.props.match.params.id];
         return (
-            <div className='container' >
+            <div className='container pb-5' >
                 {this.state.emptyPost && <h1>Has not selection post</h1>}
                 {
                     onePost &&
                     (
                         <div>
-                            <h1>{onePost.post.title}</h1>
-                            <img alt='alt' src={onePost.post.fileUrl} width='100%' />
-                            <p>{onePost.post.description}</p>
-                            const date = `${d.toLocaleString("en-US", { month: "short" })} ${d.toLocaleString("en-US", { day: "numeric" })}th ${d.toLocaleString("en-US", { year: "numeric" })}`
+                            <h1 className='mt-5'>{onePost.post.title}</h1>
+                            <div className='d-flex mt-4'>
+                                <label className='btn btn-danger'>{onePost.post?.categories === '' ? 'not choose' : onePost.post.categories}</label>
+                                <div className='ml-4 mt-2'>{date}</div>
+                            </div>
+                            <img className='mt-4' alt='alt' src={onePost.post.fileUrl} width='100%' />
+                            <p className='container p-5 text-justify'>{onePost.post.description}</p>
                                         
                             <input
                                 className='btn btn-danger'
@@ -127,7 +129,6 @@ class ProfilePage extends Component {
                                 onClick={this.deletePost(this.props.match.params.id)}
                                 style={{ display: this.state.display }}
                             />
-                            <div>{date}</div>
                         </div>
                     )
 

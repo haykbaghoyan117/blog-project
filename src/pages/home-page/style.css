@@ -57,4 +57,13 @@ label {
     transition: 0.1s;
     opacity: 0;
   }
-  
+  .pag-section {
+    background-color: #fff !important;
+  }
+  .pag-section:focus {
+    background-color: red !important;
+    color: white !important;
+  }
+  .scroll-button {
+    display: block;
+  }

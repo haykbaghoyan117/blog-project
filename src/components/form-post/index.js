@@ -35,7 +35,7 @@ class FormPost extends Component {
                                                                 <p className="text-justify">{el.post.description.substring(0, 100)}...</p>
                                                             </div>
                                                             <div className='d-flex justify-content-between'>
-                                                                <button className='btn btn-danger'>Category: {el.post.categories === '' ? 'not choose' : el.post.categories}</button>
+                                                                <button className='btn btn-danger'>{el.post.categories === '' ? 'not choose' : el.post.categories}</button>
                                                                 <div>{date}</div>
                                                             </div>
                                                         </div>
