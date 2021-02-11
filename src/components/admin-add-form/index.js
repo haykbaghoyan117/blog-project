@@ -11,6 +11,7 @@ class AdminAddForm extends Component {
         fileUrl: null,
         id: '',
         categories: '',
+        categoryErrorMessage: ''
     }
 
     handleChange = ({ target: { value, id } }) => {
@@ -38,8 +39,12 @@ class AdminAddForm extends Component {
     }
 
     addData = async () => {
-        const postId = `${100000000000000 - Date.now()}`;
         const { title, description, fileUrl, categories } = this.state;
+        if (!categories) {
+            setTimeout(() => this.setState({categoryErrorMessage: false}), 3000)
+            return this.setState({ categoryErrorMessage: true })
+        }
+        const postId = `${100000000000000 - Date.now()}`;
         await db.ref(`${postId}/` + 'post').set({
             'title': title,
             'fileUrl': fileUrl,
@@ -51,66 +56,72 @@ class AdminAddForm extends Component {
     render() {
         return (
             <div className='admin-add-form'>
-                        <>
-                            <h1 className='admin-title'>Add new post</h1>
-                            <form className='admin-form' action="" onSubmit={this.handleSubmit} >
-                                <div className="form-group">
-                                    <input
-                                        required
-                                        type="text"
-                                        className="form-control admin-input"
-                                        value={this.state.title}
-                                        placeholder="Your post title"
-                                        id="title"
-                                        onChange={this.handleChange}
-                                    />
+                {
+                    this.state.categoryErrorMessage && (<div class="alert alert-danger" style={{position: 'absolute', right: 50, top: 20}} role="alert">
+                       Category required field
+                    </div>)
+                }
+                <>
+                    <h1 className='admin-title'>Add new post</h1>
+                    <form className='admin-form' action="" onSubmit={this.handleSubmit} >
+                        <div className="form-group">
+                            <input
+                                required
+                                type="text"
+                                className="form-control admin-input"
+                                value={this.state.title}
+                                placeholder="Your post title"
+                                id="title"
+                                onChange={this.handleChange}
+                            />
+                        </div>
+                        <div className="form-group">
+                            <input
+                                required
+                                type="file"
+                                className="form-control admin-input-file"
+                                onChange={this.onFileChange}
+                                placeholder="img url"
+                                id="img"
+                            />
+                        </div>
+                        <div className="form-group">
+                            <input
+                                required
+                                type="text"
+                                className="form-control admin-input"
+                                value={this.state.description}
+                                placeholder="description"
+                                id="description"
+                                onChange={this.handleChange}
+                            />
+                        </div>
+                        <div className='admin-button'>
+                            <div className="dropdown">
+                                <input
+                                    className="btn btn-light dropdown-toggle"
+                                    type="button"
+                                    id="dropdownMenu2"
+                                    data-toggle="dropdown"
+                                    aria-haspopup="true"
+                                    aria-expanded="false"
+                                    value={`Categories: ${this.state.categories}`}
+                                />
+
+                                <div className="dropdown-menu" aria-labelledby="dropdownMenu2">
+                                    <input className="dropdown-item" type="button" value='Animals' onClick={this.createCategories} />
+                                    <input className="dropdown-item" type="button" value='Nature' onClick={this.createCategories} />
+                                    <input className="dropdown-item" type="button" value='News' onClick={this.createCategories} />
+                                    <input className="dropdown-item" type="button" value='Sport' onClick={this.createCategories} />
+                                    <input className="dropdown-item" type="button" value='Cars' onClick={this.createCategories} />
+                                    <input className="dropdown-item" type="button" value='Happy' onClick={this.createCategories} />
                                 </div>
-                                <div className="form-group">
-                                    <input
-                                        required
-                                        type="file"
-                                        className="form-control admin-input-file"
-                                        onChange={this.onFileChange}
-                                        placeholder="img url"
-                                        id="img"
-                                    />
-                                </div>
-                                <div className="form-group">
-                                    <input
-                                        required
-                                        type="text"
-                                        className="form-control admin-input"
-                                        value={this.state.description}
-                                        placeholder="description"
-                                        id="description"
-                                        onChange={this.handleChange}
-                                    />
-                                </div>
-                                <div className='admin-button'>
-                                    <div className="dropdown">
-                                        <input
-                                            className="btn btn-light dropdown-toggle"
-                                            type="button"
-                                            id="dropdownMenu2"
-                                            data-toggle="dropdown"
-                                            aria-haspopup="true"
-                                            aria-expanded="false"
-                                            value={`Categories: ${this.state.categories}`}
-                                        />
-                                        <div className="dropdown-menu" aria-labelledby="dropdownMenu2">
-                                            <input className="dropdown-item" type="button" value='Animals' onClick={this.createCategories} />
-                                            <input className="dropdown-item" type="button" value='Nature' onClick={this.createCategories} />
-                                            <input className="dropdown-item" type="button" value='News' onClick={this.createCategories} />
-                                            <input className="dropdown-item" type="button" value='Sport' onClick={this.createCategories} />
-                                            <input className="dropdown-item" type="button" value='Cars' onClick={this.createCategories} />
-                                            <input className="dropdown-item" type="button" value='Happy' onClick={this.createCategories} />
-                                        </div>
-                                    </div>
-                                    <button type="submit" className="btn btn-light admin-right-button">Add post</button>
-                                </div>
-                            </form>
-                        </>
-                    
+                            </div>
+                            <button type="submit" className="btn btn-light admin-right-button">Add post</button>
+                        </div>
+                    </form>
+                </>
+
             </div>
         )
     }

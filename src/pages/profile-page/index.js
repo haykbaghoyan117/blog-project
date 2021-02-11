@@ -5,6 +5,7 @@ import { setPosts, randPosts, setSelectionPost } from "../../store/actions";
 import Spinner from '../../components/spinner';
 import FormPost from '../../components/form-post';
 import './style.css';
+import Comment from '../../components/comment';
 
 
 class ProfilePage extends Component {
@@ -92,7 +93,7 @@ class ProfilePage extends Component {
         if(!this.props.user.user) {
             return this.props.history.push('/sign-in')
         }
-        await db.ref().child(id).child('comments').push({
+        e.target[0].value && await db.ref().child(id).child('comments').push({
             'displayName': this.props.user?.user?.displayName,
             'comment': e.target[0].value
         });
@@ -109,6 +110,7 @@ class ProfilePage extends Component {
         const onePost = this.props.posts?.posts[this.props.match.params.id];
         return (
             <div className='container pb-5' >
+                <Comment />
                 {this.state.emptyPost && <h1>Has not selection post</h1>}
                 {
                     onePost &&
@@ -123,7 +125,7 @@ class ProfilePage extends Component {
                             <p className='container p-5 text-justify'>{onePost.post.description}</p>
                                         
                             <input
-                                className='btn btn-danger'
+                                className='btn btn-danger mb-4'
                                 type='button'
                                 value='Delete post'
                                 onClick={this.deletePost(this.props.match.params.id)}

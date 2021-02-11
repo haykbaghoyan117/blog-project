@@ -26,7 +26,8 @@ class FormPost extends Component {
                                         return (
                                             <div className='col-lg-4 col-md-6 col-12 all-posts'>
                                                     <div onClick={() => {
-                                                return this.props.history?.push(`/profile-page/${key}`)
+                                                        this.props.history?.push(`/profile-page/${key}`)
+                                                        window.scrollTo(0, 0);
                                             }} className="d-flex flex-column form-style">
                                                         <img className="form-img" src={el.post.fileUrl} alt="Card image" />
                                                         <div className="all-form p-4">

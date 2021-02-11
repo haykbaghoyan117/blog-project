@@ -11,6 +11,7 @@ import { auth } from './firebase'
 import { connect } from 'react-redux';
 import { setUser } from "./store/actions";
 import AdminPage from './pages/admin-page';
+import ScrollTop from "./components/scroll-top";
 
 class App extends Component {
     async componentDidMount() {
@@ -21,6 +22,7 @@ class App extends Component {
             <div>
                 <Router>
                     <Header />
+                    <ScrollTop />
                     <Switch>
                         <Route path='/' exact component={HomePage} />
                         <Route path='/sign-up' component={SignUp} />

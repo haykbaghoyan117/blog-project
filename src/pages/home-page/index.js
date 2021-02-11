@@ -11,8 +11,7 @@ import SearchBar from '../../components/search-bar';
 class HomePage extends Component {
 
     state = {
-        text: '',
-        scrollButton: 'block'
+        text: ''
     }
 
     async componentDidMount() {
@@ -51,7 +50,6 @@ class HomePage extends Component {
         }else return this.props.posts.posts;
     }
     render() {
-        const { scrollButton } = this.state;
         return (
             <div className='pb-5 pt-5'>
                 <div className='container home-search'>
@@ -65,13 +63,7 @@ class HomePage extends Component {
                         </div>
                     </div>
                 </div>
-                <input
-                    type='button'
-                    className='scroll-button'
-                    value='^'
-                    onClick={() => { window.scrollTo(0, 0) }}
-                    style={{position:"fixed", display:`${ scrollButton }`}}
-                />
+           
                 <FormPost allPosts={this.filterObjects()} history={this.props.history} />
                 <div className='m-5'>
                     <ul class="pagination justify-content-center">

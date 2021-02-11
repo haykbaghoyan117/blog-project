@@ -86,13 +86,13 @@ class Footer extends Component {
                                             <a href='#'><img alt='image' src={visa} width='40px' /></a>
                                         </li>
                                         <li className='ml-2 my-card'>
-                                            <img alt='image' src={master} width='40px' />
+                                            <a href='#'><img alt='image' src={master} width='40px' /></a>
                                         </li>
                                         <li className='ml-2 my-card'>
-                                            <img alt='image' src={discover} width='40px' />
+                                            <a href='#'><img alt='image' src={discover} width='40px' /></a>
                                         </li>
                                         <li className='ml-2 my-card'>
-                                            <img alt='image' src={pay} width='40px' />
+                                            <a href='#'><img alt='image' src={pay} width='40px' /></a>
                                         </li>
                                     </ul>
                                 </div>
