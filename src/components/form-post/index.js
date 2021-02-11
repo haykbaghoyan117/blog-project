@@ -24,10 +24,10 @@ class FormPost extends Component {
                                         const d = new Date(100000000000000 - key)
                                         const date = `${d.toLocaleString("en-US", { month: "short" })} ${d.toLocaleString("en-US", { day: "numeric" })}th ${d.toLocaleString("en-US", { year: "numeric" })}`
                                         return (
-                                            <div onClick={() => {
+                                            <div className='col-lg-4 col-md-6 col-12 all-posts'>
+                                                    <div onClick={() => {
                                                 return this.props.history?.push(`/profile-page/${key}`)
-                                            }} className='col-lg-4 col-md-6 col-12 all-posts'>
-                                                    <div className="d-flex flex-column form-style">
+                                            }} className="d-flex flex-column form-style">
                                                         <img className="form-img" src={el.post.fileUrl} alt="Card image" />
                                                         <div className="all-form p-4">
                                                             <div className=''>

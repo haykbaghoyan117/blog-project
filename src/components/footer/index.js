@@ -1,4 +1,8 @@
 import React, { Component } from 'react';
+import visa from '../../images/visa.png';
+import master from '../../images/master.jpg';
+import discover from '../../images/discover.png';
+import pay from '../../images/pay.jpg';
 import './style.css';
 
 class Footer extends Component {
@@ -10,8 +14,8 @@ class Footer extends Component {
                         <div className="d-md-flex justify-content-center col-12 p-5 mb-md-0 footer-header">
                             <h3><strong className='d-sm-flex justify-content-sm-center d-flex justify-content-center'>Get the latest deals and more</strong></h3>
                             <div className='d-sm-flex justify-content-sm-center d-flex justify-content-center'>
-                                <input placeholder='Enter email address' className='ml-md-2' />
-                                <input type='button' className='btn btn-danger' value='Sign Up' />
+                                <input placeholder='Enter email address' className='ml-md-2 inp-sign-up' />
+                                <input type='button' className='foot-btn text-light inp-sign-up' value='Sign Up' />
                             </div>
                         </div>
                         <div className="container mt-5">
@@ -22,12 +26,12 @@ class Footer extends Component {
                                     <ul className="list-unstyled mb-0">
                                         <li>
                                             <div className='d-flex justify-content-lg-start justify-content-center'>
-                                                <input placeholder='City or zip code' className='search-foot' />
-                                                <button type='button' className='btn btn-danger'><i class="fas fa-search"></i></button>
+                                                <input placeholder='City or zip code' className='search-foot inp-sign-up' />
+                                                <button type='button' className='foot-btn text-light inp-sign-up'><i class="fas fa-search"></i></button>
                                             </div>
                                         </li>
                                         <li className='d-flex justify-content-lg-start justify-content-center'>
-                                            <p className="mt-2 search-footer-t">Enter your city or zip code to find a store near you</p>
+                                            <p className="mt-2 search-footer-t">Enter city or zip code</p>
                                         </li>
                                     </ul>
                                 </div>
@@ -77,6 +81,20 @@ class Footer extends Component {
                                 </div>
                                 <div className="col-lg-3 col-md-6 mb-4 mb-md-0">
                                     <h3>Payment methods</h3>
+                                    <ul className="list-unstyled pt-2 d-flex justify-content-center justify-content-lg-start mb-0">
+                                        <li className='my-card'>
+                                            <a href='#'><img alt='image' src={visa} width='40px' /></a>
+                                        </li>
+                                        <li className='ml-2 my-card'>
+                                            <img alt='image' src={master} width='40px' />
+                                        </li>
+                                        <li className='ml-2 my-card'>
+                                            <img alt='image' src={discover} width='40px' />
+                                        </li>
+                                        <li className='ml-2 my-card'>
+                                            <img alt='image' src={pay} width='40px' />
+                                        </li>
+                                    </ul>
                                 </div>
                             </div>
                         </div>

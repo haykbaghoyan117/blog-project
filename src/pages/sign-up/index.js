@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import { signUpWithEmailAndPassword } from "../../firebase";
 import './style.css';
 
@@ -43,23 +44,26 @@ class SignUp extends Component {
     render() {
         const { email, password, name } = this.state;
         return (
-            <div className='sign-up'>
-                <h3>Sign Up</h3>
-                <form onSubmit={this.handleSubmit}>
-                    <div className="form-group">
-                        <label htmlFor="email">Name:</label>
-                        <input type="text" className="form-control" id="name" value={name} onChange={this.handleChange} />
-                    </div>
-                    <div className="form-group">
-                        <label htmlFor="email">Email address:</label>
-                        <input type="email" className="form-control" id="email" value={email} onChange={this.handleChange} />
-                    </div>
-                    <div className="form-group">
-                        <label htmlFor="password">Password:</label>
-                        <input type="password" className="form-control" id="password" value={password} onChange={this.handleChange} />
-                    </div>
-                    <button type="submit" className="btn btn-secondary">Submit</button>
-                </form>
+            <div className='sign-up-page'>
+                <div className='sign-up'>
+                    <h3>Sign Up</h3>
+                    <form onSubmit={this.handleSubmit}>
+                        <div className="form-group">
+                            <label htmlFor="email">Name:</label>
+                            <input type="text" className="form-control" id="name" value={name} onChange={this.handleChange} />
+                        </div>
+                        <div className="form-group">
+                            <label htmlFor="email">Email address:</label>
+                            <input type="email" className="form-control" id="email" value={email} onChange={this.handleChange} />
+                        </div>
+                        <div className="form-group">
+                            <label htmlFor="password">Password:</label>
+                            <input type="password" className="form-control" id="password" value={password} onChange={this.handleChange} />
+                        </div>
+                        <button type="submit" className="btn btn-success mt-3">Submit</button>
+                        <p className='mt-3'>you already have an account? <Link to='/sign-in'>Sign In</Link></p>
+                    </form>
+                </div>
             </div>
         )
     }

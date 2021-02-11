@@ -33,6 +33,9 @@
     width: 100%;
     min-height: auto;
 }
+.form-style:hover {
+    cursor: pointer;
+}
 
 .post-details {
     width: 60%;

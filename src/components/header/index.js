@@ -70,7 +70,7 @@ class Header extends Component {
                                     <li className="nav-item m-2">
                                         <div className="dropdown">
                                             <button
-                                                className='drop'
+                                                className='drop button-check-1'
                                                 id="dropdownMenu2"
                                                 data-toggle="dropdown"
                                                 aria-haspopup="true"
@@ -80,12 +80,12 @@ class Header extends Component {
                                                 </NavLink>
                                             </button>
 
-                                            <div class="dropdown-menu drop-1">
-                                                <li className="nav-item">
-                                                    <NavLink activeStyle={{ color: "tomato" }} className="nav-link link-1 static-link" to='/sign-in'>SignIn</NavLink>
+                                            <div class="dropdown-menu dropdown-menu-right drop-1">
+                                                <li className="nav-item drop-items-1">
+                                                    <NavLink activeStyle={{ color: "tomato" }} className="nav-link link-1 static-link" to='/sign-in'><strong>Sign In</strong></NavLink>
                                                 </li>
-                                                <li className="nav-item">
-                                                    <NavLink activeStyle={{ color: "tomato" }} className="nav-link link-1 static-link" to='/sign-up'>SignUp</NavLink>
+                                                <li className="nav-item drop-items-1">
+                                                    <NavLink activeStyle={{ color: "tomato" }} className="nav-link link-1 static-link" to='/sign-up'><strong>Sign Up</strong></NavLink>
                                                 </li>
                                             </div>
                                         </div>
@@ -102,11 +102,6 @@ class Header extends Component {
                                     <span className="navbar-toggler-icon"></span>
                                 </button>
                             </nav>
-
-
-
-
-
                         )
                         :
                         (
@@ -155,7 +150,7 @@ class Header extends Component {
                                     <li className="nav-item m-2">
                                         <div className="dropdown">
                                             <button
-                                                className='drop'
+                                                className='drop button-check-1'
                                                 id="dropdownMenu2"
                                                 data-toggle="dropdown"
                                                 aria-haspopup="true"
@@ -169,9 +164,9 @@ class Header extends Component {
                                                 </NavLink>
                                             </button>
 
-                                            <div class="dropdown-menu drop-1">
-                                                <li className="nav-item">
-                                                    <Link className="nav-link link-1 static-link" to='/' onClick={signOut}>SignOut</Link>
+                                            <div class="dropdown-menu dropdown-menu-right drop-1">
+                                                <li className="nav-item drop-items-1">
+                                                    <Link className="nav-link link-1 static-link" to='/' onClick={signOut}><strong>Sign Out</strong></Link>
                                                 </li>
                                             </div>
                                         </div>

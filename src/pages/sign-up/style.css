@@ -1,25 +1,21 @@
 .sign-up {
     padding: 20px;
     margin: 0 auto;
-    margin-top: 100px;
     max-width: 500px;
     width: 100%;
     border-style: solid;
     border-radius: 15px;
-    border-width: 3px;
+    border-width: 2px;
     border-color: black;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 5);
+    background-color: #FAFAFA;
+}
+.sign-up-page {
+    padding-top: 10vh;
+    width: 100%;
+    min-height: 88vh;
+    background-color: #097BBE;
 }
 
 .sign-up form div input {
     border-radius: 10px;
-}
-
-.sign-up form button {
-    border-radius: 10px;
-    background-color: #343A40;
-}
-
-.sign-up form button:hover {
-    background-color: #343A40;
 }

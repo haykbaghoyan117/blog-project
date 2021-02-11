@@ -53,7 +53,7 @@ class HomePage extends Component {
     render() {
         const { scrollButton } = this.state;
         return (
-            <div className='pb-5'>
+            <div className='pb-5 pt-5'>
                 <div className='container home-search'>
                     <div className='blog-left'>
                         <h3>Blog</h3>
@@ -75,10 +75,10 @@ class HomePage extends Component {
                 <FormPost allPosts={this.filterObjects()} history={this.props.history} />
                 <div className='m-5'>
                     <ul class="pagination justify-content-center">
-                        <li class="page-item"><button className='btn btn-light pag-section m-1'><strong>1</strong></button></li>
-                        <li class="page-item"><button className='btn btn-light pag-section m-1'><strong>2</strong></button></li>
-                        <li class="page-item"><button className='btn btn-light pag-section m-1'><strong>3</strong></button></li>
-                        <li class="page-item"><button className='btn btn-light pag-section m-1'><strong>4</strong></button></li>
+                        <li className="page-item"><button className='btn btn-light pag-section m-1'><strong>1</strong></button></li>
+                        <li className="page-item"><button className='btn btn-light pag-section m-1'><strong>2</strong></button></li>
+                        <li className="page-item"><button className='btn btn-light pag-section m-1'><strong>3</strong></button></li>
+                        <li className="page-item"><button className='btn btn-light pag-section m-1'><strong>4</strong></button></li>
                     </ul>
                 </div>
             </div>

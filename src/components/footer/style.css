@@ -17,3 +17,13 @@
 .search-footer-t {
   width: 180px;
 }
+.foot-btn {
+  background-color: #28A745;
+}
+.inp-sign-up {
+  border: 0px;
+}
+.my-card {
+  border: 1px solid grey;
+  border-radius: 4px;
+}

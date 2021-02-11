@@ -10,7 +10,19 @@
 }
 .drop-1 {
     position: absolute !important;
+    background-color: #DBECF5 !important;
+    border-radius: 10px !important;
+    padding-left: 10px !important;
+    padding-right: 10px !important;
 }
 .header-1 {
     background-color: #fff;
+    height: 12vh;
+}
+.drop-items-1:hover {
+    background-color: #fff;
+    border-radius: 20px;
+}
+.button-check-1:focus {
+    outline: none;
 }
