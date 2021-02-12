@@ -20,7 +20,7 @@ class SignUp extends Component {
 
     handleSubmit = (e) => {
         e.preventDefault();
-        const { email, password, name } = this.state;
+        const { email, password } = this.state;
         return signUpWithEmailAndPassword(email, password)
         .then((user) => {
            user.user.updateProfile({

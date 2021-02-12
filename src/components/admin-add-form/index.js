@@ -13,6 +13,7 @@ class AdminAddForm extends Component {
         categories: '',
         categoryErrorMessage: ''
     }
+    
 
     handleChange = ({ target: { value, id } }) => {
         this.setState({ [id]: value })
@@ -32,6 +33,7 @@ class AdminAddForm extends Component {
         const fileUrl = await fileRef.getDownloadURL();
         await this.setState({ fileUrl });
         this.addData();
+        await this.props.history.push('/')
     }
 
     createCategories = ({ target: { value } }) => {
@@ -45,7 +47,7 @@ class AdminAddForm extends Component {
             return this.setState({ categoryErrorMessage: true })
         }
         const postId = `${100000000000000 - Date.now()}`;
-        await db.ref(`${postId}/` + 'post').set({
+        await db.ref(`${postId}/post`).set({
             'title': title,
             'fileUrl': fileUrl,
             'description': description,
@@ -55,9 +57,10 @@ class AdminAddForm extends Component {
 
     render() {
         return (
+            <div className='admin-page'>
             <div className='admin-add-form'>
                 {
-                    this.state.categoryErrorMessage && (<div class="alert alert-danger" style={{position: 'absolute', right: 50, top: 20}} role="alert">
+                    this.state.categoryErrorMessage && (<div className="alert alert-danger" style={{position: 'absolute', right: 50, top: 20}} role="alert">
                        Category required field
                     </div>)
                 }
@@ -86,15 +89,15 @@ class AdminAddForm extends Component {
                             />
                         </div>
                         <div className="form-group">
-                            <input
+                            <textarea
                                 required
                                 type="text"
                                 className="form-control admin-input"
                                 value={this.state.description}
                                 placeholder="description"
                                 id="description"
-                                onChange={this.handleChange}
-                            />
+                                onChange={this.handleChange}>
+                            </textarea>
                         </div>
                         <div className='admin-button'>
                             <div className="dropdown">
@@ -114,13 +117,13 @@ class AdminAddForm extends Component {
                                     <input className="dropdown-item" type="button" value='News' onClick={this.createCategories} />
                                     <input className="dropdown-item" type="button" value='Sport' onClick={this.createCategories} />
                                     <input className="dropdown-item" type="button" value='Cars' onClick={this.createCategories} />
-                                    <input className="dropdown-item" type="button" value='Happy' onClick={this.createCategories} />
                                 </div>
                             </div>
-                            <button type="submit" className="btn btn-light admin-right-button">Add post</button>
+                            <button type="submit" className="btn btn-success admin-right-button">Add post</button>
                         </div>
                     </form>
                 </>
+            </div>
 
             </div>
         )

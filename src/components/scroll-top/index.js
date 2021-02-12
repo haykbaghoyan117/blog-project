@@ -28,7 +28,7 @@ export default class ScrollTop extends Component {
         }
         return (
             <div className="scroll-button" onClick={this.handleScroll}>
-                <i class="fas fa-arrow-up"></i>
+                <i className="fas fa-arrow-up"></i>
             </div>
         )
     }

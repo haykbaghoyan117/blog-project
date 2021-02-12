@@ -27,7 +27,7 @@ class Footer extends Component {
                                         <li>
                                             <div className='d-flex justify-content-lg-start justify-content-center'>
                                                 <input placeholder='City or zip code' className='search-foot inp-sign-up' />
-                                                <button type='button' className='foot-btn text-light inp-sign-up'><i class="fas fa-search"></i></button>
+                                                <button type='button' className='foot-btn text-light inp-sign-up'><i className="fas fa-search"></i></button>
                                             </div>
                                         </li>
                                         <li className='d-flex justify-content-lg-start justify-content-center'>
@@ -83,16 +83,16 @@ class Footer extends Component {
                                     <h3>Payment methods</h3>
                                     <ul className="list-unstyled pt-2 d-flex justify-content-center justify-content-lg-start mb-0">
                                         <li className='my-card'>
-                                            <a href='#'><img alt='image' src={visa} width='40px' /></a>
+                                            <a href='/#'><img alt='ima' src={visa} width='40px' /></a>
                                         </li>
                                         <li className='ml-2 my-card'>
-                                            <a href='#'><img alt='image' src={master} width='40px' /></a>
+                                            <a href='/#'><img alt='ima' src={master} width='40px' /></a>
                                         </li>
                                         <li className='ml-2 my-card'>
-                                            <a href='#'><img alt='image' src={discover} width='40px' /></a>
+                                            <a href='/#'><img alt='ima' src={discover} width='40px' /></a>
                                         </li>
                                         <li className='ml-2 my-card'>
-                                            <a href='#'><img alt='image' src={pay} width='40px' /></a>
+                                            <a href='/#'><img alt='ima' src={pay} width='40px' /></a>
                                         </li>
                                     </ul>
                                 </div>

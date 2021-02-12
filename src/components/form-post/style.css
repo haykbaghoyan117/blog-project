@@ -2,19 +2,14 @@
     height: 250px;
     object-fit: cover;
     flex-grow: 2;
-
-    
 }
-
 .form-style {
     width: 100%;
     margin-top: 30px;
     display: flex;
     background-color: #fff;
 }
-
 .card{
-    
     display: flex !important;
 }
 .all-form {
@@ -36,10 +31,6 @@
 .form-style:hover {
     cursor: pointer;
 }
-
 .post-details {
     width: 60%;
-}
-.jjj {
-    align-content: flex-end !important;
 }

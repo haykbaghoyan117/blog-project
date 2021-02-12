@@ -7,12 +7,10 @@
 .search-button:hover {
     background-color: #fff !important;
 }
-
 .search-button {
     display: flex;
     align-self: center;
 }
-
 .variant-button input {
     text-align: center;
 }

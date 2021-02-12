@@ -6,4 +6,4 @@ export default {
     storageBucket: "fir-blog-project-e13a0.appspot.com",
     messagingSenderId: "1051703221123",
     appId: "1:1051703221123:web:900f4a3c8f093c2be134b6"
-  };
+};

@@ -4,9 +4,7 @@ import { connect } from 'react-redux';
 import { setPosts, setPost, setSelectionPost } from '../../store/actions';
 import FormPost from '../../components/form-post';
 import SearchCategories from '../../components/search-categories';
-import AdminAddForm from '../../components/admin-add-form';
 import './style.css';
-import SearchBar from '../../components/search-bar';
 
 class HomePage extends Component {
 
@@ -59,14 +57,14 @@ class HomePage extends Component {
                     </div>
                     <div className='blog-right'>
                         <div className='ggg'>
-                            <label><input className='fff' type="text" id="search-bar" onChange={this.handleChange} /><span className="search-icon"><i class="fas fa-search"></i></span></label>
+                            <label><input className='fff' type="text" id="search-bar" onChange={this.handleChange} /><span className="search-icon"><i className="fas fa-search"></i></span></label>
                         </div>
                     </div>
                 </div>
            
                 <FormPost allPosts={this.filterObjects()} history={this.props.history} />
                 <div className='m-5'>
-                    <ul class="pagination justify-content-center">
+                    <ul className="pagination justify-content-center">
                         <li className="page-item"><button className='btn btn-light pag-section m-1'><strong>1</strong></button></li>
                         <li className="page-item"><button className='btn btn-light pag-section m-1'><strong>2</strong></button></li>
                         <li className="page-item"><button className='btn btn-light pag-section m-1'><strong>3</strong></button></li>

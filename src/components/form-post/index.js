@@ -1,13 +1,11 @@
 import React, { Component } from 'react';
 import Spinner from '../spinner';
-import { Link } from "react-router-dom";
-import { setPost, setSelectionPost } from '../../store/actions';
+import { setSelectionPost } from '../../store/actions';
 import { connect } from "react-redux";
 import "./style.css";
 
 class FormPost extends Component {
     render() {
-        const { setSelectionPost } = this.props;
         return (
             this.props?.allPosts === null ?
                 (
@@ -18,18 +16,17 @@ class FormPost extends Component {
                     <div className='container'>
                         <div className='row'>
                             {
-
                                 this.props.allPosts && Object.entries(this.props.allPosts).map(
                                     ([key, el]) => {
                                         const d = new Date(100000000000000 - key)
                                         const date = `${d.toLocaleString("en-US", { month: "short" })} ${d.toLocaleString("en-US", { day: "numeric" })}th ${d.toLocaleString("en-US", { year: "numeric" })}`
                                         return (
-                                            <div className='col-lg-4 col-md-6 col-12 all-posts'>
+                                            <div key={key} className='col-lg-4 col-md-6 col-12 all-posts'>
                                                     <div onClick={() => {
                                                         this.props.history?.push(`/profile-page/${key}`)
                                                         window.scrollTo(0, 0);
                                             }} className="d-flex flex-column form-style">
-                                                        <img className="form-img" src={el.post.fileUrl} alt="Card image" />
+                                                        <img className="form-img" src={el.post.fileUrl} alt="img" />
                                                         <div className="all-form p-4">
                                                             <div className=''>
                                                                 <h4 className='form-title'><strong>{el.post.title.substring(0, 10)}...</strong></h4>

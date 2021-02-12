@@ -41,18 +41,12 @@ class SearchCategories extends Component {
                 </div>
             </div>
         )
-
     }
-
 }
-
-
 const mapStateToProps = ({ post }) => {
     return { post }
 }
-
 const mapDispatchToProps = {
     setPosts
 }
-
 export default connect(mapStateToProps, mapDispatchToProps)(SearchCategories);

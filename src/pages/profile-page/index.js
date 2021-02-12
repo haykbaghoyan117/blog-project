@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { db } from '../../firebase';
 import { connect } from 'react-redux';
 import { setPosts, randPosts, setSelectionPost } from "../../store/actions";
-import Spinner from '../../components/spinner';
 import FormPost from '../../components/form-post';
 import './style.css';
 import Comment from '../../components/comment';
@@ -82,7 +81,8 @@ class ProfilePage extends Component {
     }
     deletePost = (id) => async () => {
         await db.ref().child(id).remove();
-        this.setState({ post: null })
+        this.setState({ post: null });
+        window.scrollTo(0, 0)
     }
     handleChange = (e) => {
         e.preventDefault();
@@ -100,7 +100,7 @@ class ProfilePage extends Component {
         e.target[0].value = ''
     }
     render() {
-
+        let i = 1;
         if (!this.props.posts.posts) return null;
         const key = this.props.match.params.id;
         const d = new Date(100000000000000 - key);
@@ -110,7 +110,6 @@ class ProfilePage extends Component {
         const onePost = this.props.posts?.posts[this.props.match.params.id];
         return (
             <div className='container pb-5' >
-                <Comment />
                 {this.state.emptyPost && <h1>Has not selection post</h1>}
                 {
                     onePost &&
@@ -121,7 +120,7 @@ class ProfilePage extends Component {
                                 <label className='btn btn-danger'>{onePost.post?.categories === '' ? 'not choose' : onePost.post.categories}</label>
                                 <div className='ml-4 mt-2'>{date}</div>
                             </div>
-                            <img className='mt-4' alt='alt' src={onePost.post.fileUrl} width='100%' />
+                            <img className='mt-4 profile-page-img' alt='alt' src={onePost.post.fileUrl} />
                             <p className='container p-5 text-justify'>{onePost.post.description}</p>
                                         
                             <input
@@ -137,25 +136,20 @@ class ProfilePage extends Component {
                 }
 
                 {onePost?.comments !== undefined && Object.values(onePost.comments).map(com => {
+                    i++;
                     return (
-                        <ul>
-                            <li className='display-name'>{com.displayName}</li>
-                            <li className='user-comment'>{com.comment}</li>
-                        </ul>
+                        <div key={i}>
+                            <Comment userDisplayName={ com.displayName } commentText={ com.comment } />
+                        </div>
                     )
                 })
                 }
                 {
                     this.state.post?.post && (
                         <form onSubmit={this.addComment(this.props.match.params.id)}>
+                            <textarea className='form-control col-12' id="w3review" name="w3review" rows="4" cols="50" placeholder='Add your comment'></textarea>
                             <input
-                                type='text'
-                                placeholder='Add comment'
-                            // value={this.state.comment}
-                            // onChange={this.handleChange}
-                            />
-                            <input
-                                className='btn btn-primary'
+                                className='btn btn-primary col-12'
                                 type='submit'
                                 value='Send'
                             />
