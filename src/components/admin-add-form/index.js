@@ -33,7 +33,9 @@ class AdminAddForm extends Component {
         const fileUrl = await fileRef.getDownloadURL();
         await this.setState({ fileUrl });
         this.addData();
-        await this.props.history.push('/')
+        if(this.state.categoryErrorMessage !== '') {
+            return this.props.history.push('/')
+        }
     }
 
     createCategories = ({ target: { value } }) => {

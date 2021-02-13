@@ -14,7 +14,7 @@ class Header extends Component {
                 {
                     !user ?
                         (
-                            <nav className="navbar navbar-inline navbar-expand-lg navbar-light">
+                            <nav className="navbar navbar-inline navbar-expand-lg header-2 navbar-light">
                                 <Link className="navbar-brand" to='/'><img id="logo" src={logo} width='120px' alt='ima' /></Link>
                                 <div className="collapse navbar-collapse" id="collapsibleNavbar">
                                     <ul className="navbar-nav text-bold">
@@ -64,7 +64,7 @@ class Header extends Component {
                                                 </NavLink>
                                             </button>
                                             <div className="dropdown-menu dropdown-menu-right drop-1">
-                                                <ul>
+                                                <ul className='drop-2'>
                                                     <li className="nav-item drop-items-1">
                                                         <NavLink activeStyle={{ color: "tomato" }} className="nav-link link-1 static-link" to='/sign-in'><strong>Sign In</strong></NavLink>
                                                     </li>

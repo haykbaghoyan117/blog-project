@@ -9,16 +9,22 @@
     background: white;
 }
 .drop-1 {
+    border-radius: 10px !important;
     position: absolute !important;
     background-color: #DBECF5 !important;
-    border-radius: 10px !important;
+}
+.drop-2 {
     padding-left: 10px !important;
     padding-right: 10px !important;
 }
 .header-1 {
-    z-index: 1000 !important;
     background-color: #fff;
     height: 12vh;
+    align-content: center !important;
+}
+.header-2 {
+    z-index: 1;
+    background-color: #fff;
 }
 .drop-items-1:hover {
     background-color: #fff;
