@@ -37,11 +37,6 @@ class Header extends Component {
                                 </div>
                                 <ul className="navbar-nav navbar-right .d-sm-flex flex-row">
                                     <li className="nav-item m-2">
-                                        <NavLink activeStyle={{ color: "tomato" }} className="nav-link link-1 static-link" to='/search'>
-                                            <i className="fas fa-search"></i>
-                                        </NavLink>
-                                    </li>
-                                    <li className="nav-item m-2">
                                         <NavLink activeStyle={{ color: "tomato" }} className="nav-link link-1 static-link" to='/love'>
                                             <i className="far fa-heart"></i>
                                         </NavLink>
@@ -143,9 +138,8 @@ class Header extends Component {
                                                     }
                                                 </NavLink>
                                             </button>
-
                                             <div className="dropdown-menu dropdown-menu-right drop-1">
-                                                <ul>
+                                                <ul className='drop-2'>
                                                     <li className="nav-item drop-items-1">
                                                         <Link className="nav-link link-1 static-link" to='/' onClick={signOut}><strong>Sign Out</strong></Link>
                                                     </li>

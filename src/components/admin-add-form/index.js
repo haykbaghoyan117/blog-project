@@ -34,7 +34,10 @@ class AdminAddForm extends Component {
         await this.setState({ fileUrl });
         this.addData();
         if(this.state.categoryErrorMessage !== '') {
-            return this.props.history.push('/')
+            if(!this.state.categoryErrorMessage) {
+                return this.props.history.push('/')
+
+            }
         }
     }
 
